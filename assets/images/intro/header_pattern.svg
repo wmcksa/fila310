@@ -1,0 +1,11 @@
+<svg id="header_pattern" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="683" height="858" viewBox="0 0 683 858">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_7" data-name="Rectangle 7" width="683" height="768" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_1" data-name="Mask Group 1" clip-path="url(#clip-path)">
+    <path id="coding-man" d="M673.022,622.345v571.618H386.641l286.381,286.381H386.641L100.828,1194.532V622.345Z" transform="translate(-100.828 -622.345)" fill="#0d34fb" opacity="0.4"/>
+  </g>
+  <path id="Intersection_1" data-name="Intersection 1" d="M285.813,858l-90-90H482.194l90,90Z" transform="translate(0 0)" fill="#0d34fb" opacity="0.08"/>
+</svg>

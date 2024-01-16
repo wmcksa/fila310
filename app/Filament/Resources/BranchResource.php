@@ -13,6 +13,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Hidden;
+use Auth;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
@@ -34,7 +36,7 @@ class BranchResource extends Resource
     public static   function shouldRegisterNavigation(): bool
     {
 
-    return auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
 
     }
 
@@ -44,8 +46,9 @@ class BranchResource extends Resource
         return $form
             ->schema([
                 //
+                Hidden::make('office_id')->default(Auth::id()),
 
-                TextInput::make('name')->required(),
+                TextInput::make('name')->required()->translateLabel(),
 
 
                Forms\Components\Select::make('lang')
@@ -53,7 +56,7 @@ class BranchResource extends Resource
 
                      Lang::all()->pluck('name','code')
                     
-                )->required()->label("language")->searchable(),
+                )->required()->label("language")->searchable()->translateLabel(),
 
 
             ]);
@@ -65,7 +68,7 @@ class BranchResource extends Resource
             ->columns([
                 //
 
-                TextColumn::make('name'),
+                TextColumn::make('name')->translateLabel(),
             ])
             ->filters([
                 //
@@ -105,6 +108,19 @@ class BranchResource extends Resource
         return 
         __('Branches_nav');
     }
+
+
+    public static function getEloquentQuery(): Builder
+        {
+            if(auth()->user()->user_type =="office"){
+                return static::getModel()::query()->where('office_id', auth()->user()->id);
+            }
+            else{
+                return static::getModel()::query();
+                
+            }
+            
+        }
 
     
 

@@ -63,6 +63,7 @@ class FollowUpResource extends Resource
 
 
 
+                Hidden::make('office_id')->default(Auth::id()),
 
                 
                 Hidden::make('user_id')->default(Auth::id()),
@@ -72,7 +73,7 @@ class FollowUpResource extends Resource
 
                    Cv::all()->pluck('id','id')
                     
-                )->required()->label("CV ID"),
+                )->required()->label("CV ID")->translateLabel(),
 
 
 
@@ -82,7 +83,7 @@ class FollowUpResource extends Resource
 
                     Status::all()->pluck('name','id')
                     
-                )->required()->label("CV Status"),
+                )->required()->label("CV Status")->translateLabel(),
 
 
 /*
@@ -113,17 +114,17 @@ class FollowUpResource extends Resource
 
 
                 TextColumn::make('id'),
-                TextColumn::make('cv_id'),
+                TextColumn::make('cv_id')->translateLabel(),
 
 
-                TextColumn::make('User.name'),
+                TextColumn::make('User.name')->translateLabel(),
 
-                TextColumn::make('Status.name'),
+                TextColumn::make('Status.name')->translateLabel(),
 
                 //TextColumn::make('owner.name')->label('Responsible Name'),
                 
-                TextColumn::make('created_at'),
-                TextColumn::make('updated_at'),
+                TextColumn::make('created_at')->translateLabel(),
+                TextColumn::make('updated_at')->translateLabel(),
 
 
 
@@ -169,6 +170,18 @@ class FollowUpResource extends Resource
             'edit' => Pages\EditFollowUp::route('/{record}/edit'),
         ];
     } 
+
+    public static function getEloquentQuery(): Builder
+                {
+                    if(auth()->user()->user_type =="office"){
+                        return static::getModel()::query()->where('office_id', auth()->user()->id);
+                    }
+                    else{
+                        return static::getModel()::query();
+                        
+                    }
+                    
+                }
     
     
 

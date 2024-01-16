@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\Hidden;
+use Auth;
 
 class LoginUserResource extends Resource
 {
@@ -23,7 +25,7 @@ class LoginUserResource extends Resource
     public static   function shouldRegisterNavigation(): bool
     {
 
-    return auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
 
     }
 
@@ -34,8 +36,10 @@ class LoginUserResource extends Resource
         return $form
             ->schema([
                 //
-                TextInput::make('name')->required(),
-                TextInput::make('phone')->required()
+                Hidden::make('office_id')->default(Auth::id()),
+
+                TextInput::make('name')->required()->translateLabel(),
+                TextInput::make('phone')->required()->translateLabel()
             ]);
     }
 
@@ -44,8 +48,8 @@ class LoginUserResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('name'),
-                TextColumn::make('phone'),
+                TextColumn::make('name')->translateLabel(),
+                TextColumn::make('phone')->translateLabel(),
             ])
             ->filters([
                 //
@@ -84,6 +88,18 @@ class LoginUserResource extends Resource
 {
     return __('nav_website_users');
 }
+
+public static function getEloquentQuery(): Builder
+                {
+                    if(auth()->user()->user_type =="office"){
+                        return static::getModel()::query()->where('office_id', auth()->user()->id);
+                    }
+                    else{
+                        return static::getModel()::query();
+                        
+                    }
+                    
+                }
 
 
 }

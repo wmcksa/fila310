@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\CreateAction;
+use Filament\Forms\Components\Hidden;
+use Auth;
 
 class LangResource extends Resource
 {
@@ -31,7 +33,7 @@ class LangResource extends Resource
     public static   function shouldRegisterNavigation(): bool
     {
 
-    return auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
 
     }
 
@@ -48,8 +50,10 @@ class LangResource extends Resource
         return $form
             ->schema([
                 //
-                TextInput::make('name')->required(),
-                TextInput::make('code')->required(),
+                Hidden::make('office_id')->default(Auth::id()),
+
+                TextInput::make('name')->required()->translateLabel(),
+                TextInput::make('code')->required()->translateLabel(),
             ]);
     }
 
@@ -59,9 +63,9 @@ class LangResource extends Resource
             ->columns([
                 //
 
-                TextColumn::make('name'),
-                TextColumn::make('code'),
-                TextColumn::make('created_at'),
+                TextColumn::make('name')->translateLabel(),
+                TextColumn::make('code')->translateLabel(),
+                TextColumn::make('created_at')->translateLabel(),
             ])
             ->filters([
                 //
@@ -99,6 +103,18 @@ class LangResource extends Resource
 {
     return __('lang');
 }
+
+public static function getEloquentQuery(): Builder
+                {
+                    if(auth()->user()->user_type =="office"){
+                        return static::getModel()::query()->where('office_id', auth()->user()->id);
+                    }
+                    else{
+                        return static::getModel()::query();
+                        
+                    }
+                    
+                }
 
 
 

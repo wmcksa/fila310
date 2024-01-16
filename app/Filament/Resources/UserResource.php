@@ -19,6 +19,7 @@ use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Auth;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Forms\Components\Hidden;
 
 class UserResource extends Resource
 {
@@ -42,10 +43,11 @@ class UserResource extends Resource
         return $form
             ->schema([
                 //
+                Hidden::make('office_id')->default(Auth::id()),
 
-                TextInput::make('name')->required(),
-                TextInput::make('email')->email()->unique(ignoreRecord:true),
-                TextInput::make('phone')->numeric(),
+                TextInput::make('name')->required()->translateLabel(),
+                TextInput::make('email')->email()->unique(ignoreRecord:true)->translateLabel(),
+                TextInput::make('phone')->numeric()->translateLabel(),
                
 
                 Select::make('user_type')
@@ -56,9 +58,9 @@ class UserResource extends Resource
                         'office'=>'Office',
                         
                         
-                    ])->label("User")->required(),
+                    ])->label("User")->required()->translateLabel(),
 
-                TextInput::make('password')->password()->required(),
+                TextInput::make('password')->password()->required()->translateLabel(),
             ]);
     }
 
@@ -69,11 +71,11 @@ class UserResource extends Resource
 
                 //
                 TextColumn::make('id'),
-              TextColumn::make('name'),
-              TextColumn::make('email'),
-              TextColumn::make('phone'),
-              TextColumn::make('user_type')->label("User"),
-              TextColumn::make('created_at'),
+              TextColumn::make('name')->translateLabel(),
+              TextColumn::make('email')->translateLabel(),
+              TextColumn::make('phone')->translateLabel(),
+              TextColumn::make('user_type')->label("User")->translateLabel(),
+              TextColumn::make('created_at')->translateLabel(),
             ])
             ->filters([
                 //
@@ -122,6 +124,19 @@ class UserResource extends Resource
     {
         return __('Users_nav');
     }
+
+
+    public static function getEloquentQuery(): Builder
+                {
+                    if(auth()->user()->user_type =="office"){
+                        return static::getModel()::query()->where('office_id', auth()->user()->id);
+                    }
+                    else{
+                        return static::getModel()::query();
+                        
+                    }
+                    
+                }
 
 
 

@@ -56,14 +56,14 @@ class CvOrderResource extends Resource
                 
 
 
-                TextColumn::make('id')->searchable() ,
-                TextColumn::make('name')->label('Customer Name')->searchable() ,
+                TextColumn::make('id')->searchable()->translateLabel() ,
+                TextColumn::make('name')->label('Customer Name')->searchable()->translateLabel() ,
     
-                TextColumn::make('cv.name')->label('Cv Name')->searchable() ,
+                TextColumn::make('cv.name')->label('Cv Name')->searchable()->translateLabel() ,
                 
 
                  
-                TextColumn::make('User.name')->searchable() ,
+                TextColumn::make('User.name')->searchable()->translateLabel() ,
 
                 
 
@@ -72,11 +72,11 @@ class CvOrderResource extends Resource
                       ->getStateUsing(function (Cv_order $record): string {
                     
                     return  self::get_cv_state($record->cv_id);
-                  })
+                  })->translateLabel()
 
                 ,
 
-                CvColumn::make('cv_id')->label('')->searchable() ,
+                CvColumn::make('cv_id')->label('')->searchable() ->translateLabel(),
 
 
 
@@ -95,26 +95,6 @@ class CvOrderResource extends Resource
             ->actions([
 
                 //Tables\Actions\EditAction::make(),
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
                 
                  
             ])

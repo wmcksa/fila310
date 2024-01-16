@@ -70,7 +70,7 @@ class FollowupsReportResource extends Resource
     public static   function shouldRegisterNavigation(): bool
     {
 
-    return auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
 
     }
 
@@ -92,6 +92,7 @@ class FollowupsReportResource extends Resource
                 //
 
 
+                Hidden::make('office_id')->default(Auth::id()),
 
                 Hidden::make('user_id')->default(Auth::id()),
 
@@ -100,7 +101,7 @@ class FollowupsReportResource extends Resource
 
                    Cv::all()->pluck('id','id')
                     
-                )->required()->label("CV ID"),
+                )->required()->label("CV ID")->translateLabel(),
 
 
 
@@ -110,7 +111,7 @@ class FollowupsReportResource extends Resource
 
                     Status::all()->pluck('name','id')
                     
-                )->required()->label("CV Status"),
+                )->required()->label("CV Status")->translateLabel(),
 
 
 
@@ -119,7 +120,7 @@ class FollowupsReportResource extends Resource
 
                     User::all()->pluck('name','id')
                     
-                )->required()->label("Responsible Name"),
+                )->required()->label("Responsible Name")->translateLabel(),
 
 
 
@@ -146,16 +147,16 @@ class FollowupsReportResource extends Resource
 
 
                 TextColumn::make('id'),
-                TextColumn::make('cv_id'),
+                TextColumn::make('cv_id')->translateLabel(),
 
 
-                TextColumn::make('User.name'),
+                TextColumn::make('User.name')->translateLabel(),
 
-                TextColumn::make('Status.name'),
+                TextColumn::make('Status.name')->translateLabel(),
 
-                TextColumn::make('owner.name')->label('Responsible Name'),
-                TextColumn::make('created_at'),
-                TextColumn::make('updated_at'),
+                TextColumn::make('owner.name')->label('Responsible Name')->translateLabel(),
+                TextColumn::make('created_at')->translateLabel(),
+                TextColumn::make('updated_at')->translateLabel(),
 
 
 
@@ -250,5 +251,17 @@ class FollowupsReportResource extends Resource
             'create' => Pages\CreateFollowupsReport::route('/create'),
             'edit' => Pages\EditFollowupsReport::route('/{record}/edit'),
         ];
-    }    
+    } 
+    
+    public static function getEloquentQuery(): Builder
+                {
+                    if(auth()->user()->user_type =="office"){
+                        return static::getModel()::query()->where('office_id', auth()->user()->id);
+                    }
+                    else{
+                        return static::getModel()::query();
+                        
+                    }
+                    
+                }
 }

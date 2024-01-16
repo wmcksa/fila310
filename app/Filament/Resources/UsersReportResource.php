@@ -30,7 +30,7 @@ class UsersReportResource extends Resource
   public static   function shouldRegisterNavigation(): bool
     {
 
-    return auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
 
     }
 
@@ -55,10 +55,10 @@ class UsersReportResource extends Resource
 
 
                 TextColumn::make('id'),
-                TextColumn::make('name'),
-                TextColumn::make('email'),
-                TextColumn::make('created_at'),
-                TextColumn::make('updated_at'),
+                TextColumn::make('name')->translateLabel(),
+                TextColumn::make('email')->translateLabel(),
+                TextColumn::make('created_at')->translateLabel(),
+                TextColumn::make('updated_at')->translateLabel(),
                
                 
                 TextColumn::make('No of CVs')->translateLabel()->getStateUsing(function (UsersReport $record): string {
@@ -74,7 +74,7 @@ class UsersReportResource extends Resource
 
 
 
-                  }),
+                  })->translateLabel(),
 
 
 
@@ -141,6 +141,19 @@ public static function getNavigationLabel(): string
 {
     return __('nav_users_report');
 }
+
+
+public static function getEloquentQuery(): Builder
+                {
+                    if(auth()->user()->user_type =="office"){
+                        return static::getModel()::query()->where('office_id', auth()->user()->id);
+                    }
+                    else{
+                        return static::getModel()::query();
+                        
+                    }
+                    
+                }
 
 
 

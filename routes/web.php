@@ -44,6 +44,11 @@ Route::get('/', function () {
 
 */
 
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
+
 Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->group(function () {
 
     //Route::get('/index_ar', 'index_ar')->name('index_ar');

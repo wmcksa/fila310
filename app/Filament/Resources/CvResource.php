@@ -53,16 +53,12 @@ class CvResource extends Resource
         return $form
             ->schema([
 
-                //
-
-                 
-
-
+                Hidden::make('office_id')->default(Auth::id()),
                 Hidden::make('user_id')->default(Auth::id()),
 
 
-                TextInput::make('name')->required(),
-                TextInput::make('age')->numeric()->required(),
+                TextInput::make('name')->required()->translateLabel(),
+                TextInput::make('age')->numeric()->required()->translateLabel(),
 
 
                 Select::make('job_id')
@@ -70,7 +66,7 @@ class CvResource extends Resource
 
                         Job::all()->pluck('name','id')
                         
-                    )->required()->label("Job")->searchable(),
+                    )->required()->label("Job")->searchable()->translateLabel(),
 
 
 
@@ -81,7 +77,7 @@ class CvResource extends Resource
 
                         Country::all()->pluck('country','id')
                         
-                    )->required()->label("country")->searchable(),
+                    )->required()->label("country")->searchable()->translateLabel(),
 
                
                
@@ -94,7 +90,7 @@ class CvResource extends Resource
 
                     Type_of_estgdam::all()->pluck('name','id')
                     
-                )->required()->label("Type")->searchable(),
+                )->required()->label("Type")->searchable()->translateLabel(),
 
 
                 Select::make('religion_id')
@@ -102,7 +98,7 @@ class CvResource extends Resource
 
                     Religion::all()->pluck('name','id')
                     
-                )->required()->label("Religion")->searchable(),
+                )->required()->label("Religion")->searchable()->translateLabel(),
 
 
 
@@ -112,8 +108,8 @@ class CvResource extends Resource
 
                     Experience::all()->pluck('experience','id')
                     
-                )->required()->label("experience")->searchable(),
-                TextInput::make('experienceLocation'),
+                )->required()->label("Experience")->searchable()->translateLabel(),
+                TextInput::make('experienceLocation')->translateLabel(),
 
 
 
@@ -122,9 +118,9 @@ class CvResource extends Resource
 
 
 
-                TextInput::make('passportNumber')->numeric(),
-                TextInput::make('salary')->numeric(),
-                TextInput::make('transportFees')->numeric(),
+                TextInput::make('passportNumber')->numeric()->translateLabel(),
+                TextInput::make('salary')->numeric()->translateLabel(),
+                TextInput::make('transportFees')->numeric()->translateLabel(),
                 
                 
 
@@ -137,11 +133,11 @@ class CvResource extends Resource
                    
                     Lang::all()->pluck('name','code')
                     
-                )->required()->label("lang")->searchable(),
+                )->required()->label("lang")->searchable()->translateLabel(),
 
-                FileUpload::make('passportImage')->disk('public')->directory('cv_pic') ->imageEditor(),
-                FileUpload::make('cv_pic')->disk('public')->directory('cv_pic') ->imageEditor(),
-                FileUpload::make('cv_file')->disk('public')->directory('cv_file'),
+                FileUpload::make('passportImage')->disk('public')->directory('cv_pic') ->imageEditor()->translateLabel(),
+                FileUpload::make('cv_pic')->disk('public')->directory('cv_pic') ->imageEditor()->translateLabel(),
+                FileUpload::make('cv_file')->disk('public')->directory('cv_file')->translateLabel(),
               
             ]);
     }
@@ -154,17 +150,17 @@ class CvResource extends Resource
 
 
 
-                TextColumn::make('id')->searchable(),
-                TextColumn::make('name')->searchable(),
-                TextColumn::make('age')->searchable(),
-                TextColumn::make('User.name')->searchable(),
-                TextColumn::make('Country.country')->searchable() ,
-                TextColumn::make('Job.name')->searchable(),
-                TextColumn::make('Type_of_estgdam.name')->searchable() ,
-                TextColumn::make('Experience.experience')->searchable() ,
-                TextColumn::make('Religion.name')->searchable() ,
-                TextColumn::make('lang')->searchable() ,
-                ImageColumn::make('cv_pic'),
+                TextColumn::make('id')->searchable()->translateLabel(),
+                TextColumn::make('name')->searchable()->translateLabel(),
+                TextColumn::make('age')->searchable()->translateLabel(),
+                TextColumn::make('User.name')->searchable()->translateLabel(),
+                TextColumn::make('Country.country')->searchable()->translateLabel() ,
+                TextColumn::make('Job.name')->searchable()->translateLabel(),
+                TextColumn::make('Type_of_estgdam.name')->searchable()->translateLabel() ,
+                TextColumn::make('Experience.experience')->searchable()->translateLabel() ,
+                TextColumn::make('Religion.name')->searchable()->translateLabel() ,
+                TextColumn::make('lang')->searchable()->translateLabel() ,
+                ImageColumn::make('cv_pic')->translateLabel(),
                  
                 
 
@@ -299,6 +295,18 @@ public static function getNavigationLabel(): string
 {
     return __('Cv_nav');
 }
+
+public static function getEloquentQuery(): Builder
+                {
+                    if(auth()->user()->user_type =="office"){
+                        return static::getModel()::query()->where('office_id', auth()->user()->id);
+                    }
+                    else{
+                        return static::getModel()::query();
+                        
+                    }
+                    
+                }
 
 
 }

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
     <!--favicon-->
-    <link rel="shortcut icon" href="{{asset('assets/imgs/logo.svg')}} " type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/imgs/logo.png')}} " type="image/x-icon">
 
     <!--style-->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
@@ -36,8 +36,8 @@
         <!--navbar-->
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <img src="assets/imgs/logo.svg" alt="logo" width="100">
+                <a class="navbar-brand" href="{{route('index')}}">
+                    <img src="assets/imgs/logo.png" alt="logo" width="100">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -48,7 +48,7 @@
                     
                     <ul class="navbar-nav me-xl-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.html">الصفحة الرئيسية</a>
+                            <a class="nav-link active" aria-current="page" href="{{route('index')}}">الصفحة الرئيسية</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#about">من نحن</a>
@@ -56,16 +56,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#services">خدماتنا</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="services.html">خطوات الاستقدام</a>
-                        </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="contact-us.html">تواصل معنا</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link btn btn-primary" href="{{route('all_workers')}}">طلب استقدام</a>
+                            <a class="nav-link" href="{{route('all_workers')}}">طلب استقدام</a>
                         </li>
 
                     </ul>
@@ -80,12 +77,12 @@
         <div class="owl-carousel main-carousel owl-theme" style="height: 400px;">
             <div class="item">
                 <div class="slider-img image-cover">
-                    <img src="assets/imgs/slider-img.svg" alt="">
+                    <img src="assets/imgs/slider1.jpeg" alt="">
                 </div>
             </div>
             <div class="item">
                 <div class="slider-img image-cover">
-                    <img src="assets/imgs/01HGEG34SXV6TF6430G3GW69KC.jpg" alt="">
+                    <img src="assets/imgs/slider2.jpeg" alt="">
                 </div>
             </div>
         </div>
@@ -144,7 +141,7 @@
               </p>
             </div>
 
-            <a href="services.html" class="see-more primary-color">
+            <a href="#" class="see-more primary-color">
               <div class="icon-contain">
                 <img
                   src="assets/images/icons/arrow.svg"

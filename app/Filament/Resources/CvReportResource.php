@@ -32,7 +32,7 @@ class CvReportResource extends Resource
     public static   function shouldRegisterNavigation(): bool
     {
 
-    return auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
 
     }
 
@@ -57,16 +57,16 @@ class CvReportResource extends Resource
                 //
 
                 TextColumn::make('id')->searchable(),
-                TextColumn::make('name')->searchable(),
-                TextColumn::make('age')->searchable(),
-                TextColumn::make('User.name')->searchable(),
-                TextColumn::make('Country.country')->searchable() ,
-                TextColumn::make('Job.name')->searchable(),
-                TextColumn::make('Type_of_estgdam.name')->searchable() ,
-                TextColumn::make('Experience.experience')->searchable() ,
-                TextColumn::make('Religion.name')->searchable() ,
-                TextColumn::make('lang')->searchable() ,
-                ImageColumn::make('cv_pic'),
+                TextColumn::make('name')->searchable()->translateLabel(),
+                TextColumn::make('age')->searchable()->translateLabel(),
+                TextColumn::make('User.name')->searchable()->translateLabel(),
+                TextColumn::make('Country.country')->searchable()->translateLabel() ,
+                TextColumn::make('Job.name')->searchable()->translateLabel(),
+                TextColumn::make('Type_of_estgdam.name')->searchable()->translateLabel() ,
+                TextColumn::make('Experience.experience')->searchable()->translateLabel() ,
+                TextColumn::make('Religion.name')->searchable()->translateLabel() ,
+                TextColumn::make('lang')->searchable()->translateLabel(),
+                ImageColumn::make('cv_pic')->translateLabel(),
 
 
             ])
@@ -146,63 +146,24 @@ class CvReportResource extends Resource
     
     
 
-/*
-    public static function getEloquentQuery(): Builder
-{
-
-
-    //return parent::getEloquentQuery()->where('user_id', '4');
-
-/*
-    $cvs = CvReport::get();
-
-
-    $objects=array(
-
-        "id"=>"id",
-        "name"=>"name",
-        
-        
-
-
-
-);
-$json=json_encode($objects,JSON_UNESCAPED_SLASHES);
-$json=json_decode($json);
-
-$cvs->push($json);
-
-
-
-    return $cvs->toQuery(); ;
-
-    /*
-    $objects=array(
-
-        
-        "count"=>"1",
-        "sum"=>"2"
-        
-
-
-
-);
-
-
-$json=json_encode($objects,JSON_UNESCAPED_SLASHES);
-$json=json_decode($json);
-
-$users->push($json);
-
- return $users ;
-
-}
-*/
 
 public static function getNavigationLabel(): string
 {
     return __('nav_cvs_report');
 }
+
+
+public static function getEloquentQuery(): Builder
+                {
+                    if(auth()->user()->user_type =="office"){
+                        return static::getModel()::query()->where('office_id', auth()->user()->id);
+                    }
+                    else{
+                        return static::getModel()::query();
+                        
+                    }
+                    
+                }
 
 
 }

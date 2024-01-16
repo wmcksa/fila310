@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\Hidden;
+use Auth;
  
  
 
@@ -40,7 +42,7 @@ class CountryResource extends Resource
     public static   function shouldRegisterNavigation(): bool
     {
 
-    return auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
 
     }
 
@@ -52,6 +54,8 @@ class CountryResource extends Resource
         return $form
             ->schema([
                 //
+                Hidden::make('office_id')->default(Auth::id()),
+
                 TextInput::make('country')->translateLabel()->required(),
 
 
@@ -60,7 +64,7 @@ class CountryResource extends Resource
 
                   Lang::all()->pluck('name','code')
                     
-                )->required()->label("language")->searchable(),
+                )->required()->label("language")->searchable()->translateLabel(),
 
 
             ]);
@@ -111,7 +115,19 @@ class CountryResource extends Resource
             'create' => Pages\CreateCountry::route('/create'),
             'edit' => Pages\EditCountry::route('/{record}/edit'),
         ];
-    }  
+    } 
+    
+    public static function getEloquentQuery(): Builder
+        {
+            if(auth()->user()->user_type =="office"){
+                return static::getModel()::query()->where('office_id', auth()->user()->id);
+            }
+            else{
+                return static::getModel()::query();
+                
+            }
+            
+        }
     
     
 

@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\Hidden;
+use Auth;
 
 class StatusResource extends Resource
 {
@@ -27,7 +29,7 @@ class StatusResource extends Resource
 
     public static   function shouldRegisterNavigation(): bool
     {
-    return auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
     }
 
 
@@ -41,7 +43,9 @@ class StatusResource extends Resource
         return $form
             ->schema([
                 //
-                TextInput::make('name')->required(),
+                Hidden::make('office_id')->default(Auth::id()),
+
+                TextInput::make('name')->required()->translateLabel(),
             ]);
     }
 
@@ -51,7 +55,7 @@ class StatusResource extends Resource
             ->columns([
                 //
 
-                TextColumn::make('name'),
+                TextColumn::make('name')->translateLabel(),
             ])
             ->filters([
                 //
@@ -89,7 +93,17 @@ class StatusResource extends Resource
     }
 
 
-    
+    public static function getEloquentQuery(): Builder
+                {
+                    if(auth()->user()->user_type =="office"){
+                        return static::getModel()::query()->where('office_id', auth()->user()->id);
+                    }
+                    else{
+                        return static::getModel()::query();
+                        
+                    }
+                    
+                }
 
 
 

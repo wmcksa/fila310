@@ -19,9 +19,12 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\Hidden;
+use Auth;
 use Filament\Tables\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Tables\Filters\SelectFilter;
+
+
 
 use Illuminate\Support\Facades\File;
 
@@ -35,7 +38,7 @@ class BanerResource extends Resource
     public static   function shouldRegisterNavigation(): bool
     {
 
-    return auth()->user()->user_type=="admin"?true:false;
+    return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
 
     }
 
@@ -49,23 +52,15 @@ class BanerResource extends Resource
             ->schema([
                 //
 
-
-
-              
-
-
-
-
-              
-                
+                Hidden::make('office_id')->default(Auth::id()),
                
-                FileUpload::make('image')->disk('public')->directory('baners') ->imageEditor(),
+                FileUpload::make('image')->disk('public')->directory('baners') ->imageEditor()->translateLabel(),
                 Select::make('lang')
                 ->options(
                     
                     Lang::all()->pluck('name','code')
                     
-                )->required()->label("lang")->searchable(),
+                )->required()->label("lang")->searchable()->translateLabel(),
 
 
 
@@ -82,8 +77,8 @@ class BanerResource extends Resource
                 //
 
             
-                ImageColumn::make('image'),
-                TextColumn::make('lang')->searchable() ,
+                ImageColumn::make('image')->translateLabel(),
+                TextColumn::make('lang')->searchable()->translateLabel() ,
             ])
             ->filters([
                 //
@@ -112,7 +107,20 @@ class BanerResource extends Resource
             'create' => Pages\CreateBaner::route('/create'),
             'edit' => Pages\EditBaner::route('/{record}/edit'),
         ];
-    }  
+    } 
+    
+    
+    public static function getEloquentQuery(): Builder
+        {
+            if(auth()->user()->user_type =="office"){
+                return static::getModel()::query()->where('office_id', auth()->user()->id);
+            }
+            else{
+                return static::getModel()::query();
+                
+            }
+            
+        }
     
     
 

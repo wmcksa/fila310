@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\Hidden;
+use Auth;
 
 
 class TypeOfEstgdamResource extends Resource
@@ -31,7 +33,7 @@ class TypeOfEstgdamResource extends Resource
 
     public static   function shouldRegisterNavigation(): bool
     {
-    return auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
     }
 
 
@@ -47,13 +49,15 @@ class TypeOfEstgdamResource extends Resource
         return $form
             ->schema([
                 //
+                Hidden::make('office_id')->default(Auth::id()),
+
                 TextInput::make('name')->required(),
                 
                 Forms\Components\Select::make('lang')
                 ->options(
                     Lang::all()->pluck('name','code')
                     
-                )->required()->label("language")->searchable(),
+                )->required()->label("language")->searchable()->translateLabel(),
             ]);
     }
 
@@ -62,9 +66,9 @@ class TypeOfEstgdamResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('name'),
+                TextColumn::make('name')->translateLabel(),
 
-                TextColumn::make('lang'),
+                TextColumn::make('lang')->translateLabel(),
 
 
 
@@ -112,6 +116,18 @@ class TypeOfEstgdamResource extends Resource
     {
         return __('Types_of_estgdam_nav');
     }
+
+    public static function getEloquentQuery(): Builder
+                {
+                    if(auth()->user()->user_type =="office"){
+                        return static::getModel()::query()->where('office_id', auth()->user()->id);
+                    }
+                    else{
+                        return static::getModel()::query();
+                        
+                    }
+                    
+                }
 
   
 
