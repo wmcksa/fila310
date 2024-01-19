@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cv_order;
-use App\Models\Loginuser;
+use App\Models\LoginUser;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\W_api;
 class Otp extends Controller
@@ -26,7 +26,7 @@ class Otp extends Controller
 
     public function get_code( Request $request)
     {
-        Loginuser::create([
+        LoginUser::create([
             "name"=>$request->name,
             "phone"=>$request->phone2
     ]);
