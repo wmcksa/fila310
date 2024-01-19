@@ -17,7 +17,7 @@
    "Cv_nav":" السير الذاتية " ,
    "project_name":" نظام مستعد    " ,
    "nav_cvs_report":" تقارير السير الذاتية      " ,
-   "nav_users_report":" تقاري المستخدمين      " ,
+   "nav_users_report":" تقارير المستخدمين      " ,
    "nav_website_users":"  مستخدمين الموقع        " ,
    "Cv_orders_nav":"طلبات السير الذاتية" ,
    "nav_baners":" بنرات الموقع   " ,
@@ -54,14 +54,7 @@
    "Logo":"صوره الشعار",
    "language":"اللغة",
    "Responsible Name":"اسم المسؤول",
-   "lang":"اللغة",
-   "lang":"اللغة",
-   "lang":"اللغة",
-   "lang":"اللغة",
-   "lang":"اللغة",
-   "lang":"اللغة",
-   "lang":"اللغة",
-   "lang":"اللغة",
+   "Email":"البريد الالكتروني",
    "followups_report":"تقرير المتابعات " 
 
 

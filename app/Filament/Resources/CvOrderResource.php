@@ -7,8 +7,7 @@ use App\Filament\Resources\CvOrderResource\RelationManagers;
 use App\Models\Cv_order;
 use App\Models\Follow_up;
 use App\Models\Status;
-
-
+use App\Models\User;
 use App\Tables\Columns\CvColumn;
 use App\Tables\Columns\Addstatus;
 
@@ -69,7 +68,7 @@ class CvOrderResource extends Resource
 
 
                 Tables\Columns\TextColumn::make('status')
-                      ->getStateUsing(function (Cv_order $record): string {
+                    ->getStateUsing(function (Cv_order $record): string {
                     
                     return  self::get_cv_state($record->cv_id);
                   })->translateLabel()
@@ -175,6 +174,24 @@ class CvOrderResource extends Resource
 
     }
 
+
+    public static function getModelLabel(): string
+        {
+            return __('Cv_orders_nav');
+        } 
+        
+        
+        public static function getEloquentQuery(): Builder
+        {
+            if(auth()->user()->user_type =="office" OR auth()->user()->user_type =="employee"){
+                $user=User::where('id',auth()->user()->id)->first();
+                return static::getModel()::query()->where('office_id',$user->manager_id );
+            }
+            else{
+                return static::getModel()::query()->where('office_id', auth()->user()->id);
+            }
+            
+        }
 
 
 

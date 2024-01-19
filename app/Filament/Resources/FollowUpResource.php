@@ -55,6 +55,14 @@ class FollowUpResource extends Resource
 
     public static function form(Form $form): Form
     {
+        if(auth()->user()->user_type == "office" OR auth()->user()->user_type =="employee" )
+        {
+            $user=User::where('id',auth()->user()->id)->first();
+            $office_id=$user->manager_id;
+        }else{
+            $office_id= auth()->user()->id;
+
+        }
         return $form
             ->schema([
                 //
@@ -63,7 +71,7 @@ class FollowUpResource extends Resource
 
 
 
-                Hidden::make('office_id')->default(Auth::id()),
+                Hidden::make('office_id')->default($office_id),
 
                 
                 Hidden::make('user_id')->default(Auth::id()),
@@ -71,7 +79,7 @@ class FollowUpResource extends Resource
                 Select::make('cv_id')
                 ->options(
 
-                   Cv::all()->pluck('id','id')
+                   Cv::where('office_id',$office_id)->pluck('id','id')
                     
                 )->required()->label("CV ID")->translateLabel(),
 
@@ -81,7 +89,7 @@ class FollowUpResource extends Resource
                 Select::make('status_id')
                 ->options(
 
-                    Status::all()->pluck('name','id')
+                    Status::where('office_id',$office_id)->pluck('name','id')
                     
                 )->required()->label("CV Status")->translateLabel(),
 
@@ -172,16 +180,16 @@ class FollowUpResource extends Resource
     } 
 
     public static function getEloquentQuery(): Builder
-                {
-                    if(auth()->user()->user_type =="office"){
-                        return static::getModel()::query()->where('office_id', auth()->user()->id);
-                    }
-                    else{
-                        return static::getModel()::query();
-                        
-                    }
-                    
-                }
+        {
+            if(auth()->user()->user_type =="office" OR auth()->user()->user_type =="employee"){
+                $user=User::where('id',auth()->user()->id)->first();
+                return static::getModel()::query()->where('office_id',$user->manager_id );
+            }
+            else{
+                return static::getModel()::query()->where('office_id', auth()->user()->id);
+            }
+            
+        }
     
     
 
@@ -193,6 +201,12 @@ class FollowUpResource extends Resource
     {
         return __('Followups_nav');
     }
+
+
+    public static function getModelLabel(): string
+        {
+            return __('Followups_nav');
+        }  
 
 
 

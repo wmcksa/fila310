@@ -17,11 +17,12 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Filament\Resources\NoResource\Pages\Auth\Register;
 
 use Filament\SpatieLaravelTranslatablePlugin;
 use BezhanSalleh\FilamentLanguageSwitch\FilamentLanguageSwitchPlugin;
 use App\Packages\BrandNameSet;
+use App\Filament\Pages\Auth\Register;
+
 class AdminPanelProvider extends PanelProvider
 {
 
@@ -33,7 +34,8 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-          
+            ->registration(Register::class) 
+
             ->login()
          
             ->colors([

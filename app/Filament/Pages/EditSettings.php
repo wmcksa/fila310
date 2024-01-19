@@ -10,9 +10,11 @@ use Filament\Pages\Page;
 use Filament\Forms\Form;
 use Filament\Actions\Action;
 use App\Models\Setting;
+use App\Models\User;
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Hidden;
 
 class EditSettings extends Page implements HasForms
 
@@ -39,29 +41,28 @@ class EditSettings extends Page implements HasForms
 
  public function mount(): void 
     {
-        $this->form->fill(
-
- 
-
-
-
-            Setting::latest()->first()->attributesToArray()
-
-
-
-
-
-        );
+        if(auth()->user()->user_type == "office" OR auth()->user()->user_type =="employee" )
+        {
+            $user=User::where('id',auth()->user()->id)->first();
+            $office_id=$user->manager_id;
+        }else{
+            $office_id= auth()->user()->id;
+        }
+        $setting=Setting::where('office_id',$office_id)->first();
+        if($setting){
+            $this->form->fill(Setting::where('office_id',$office_id)->first()->attributesToArray()); 
+        }
+        else{
+            $this->form->fill();
+        }
     }
  
     public function form(Form $form): Form
     {
+        
         return $form
             ->schema([
 
-
-
-               
 
                 TextInput::make('cv_update_time')
                     ->numeric()->required(),
@@ -127,12 +128,28 @@ class EditSettings extends Page implements HasForms
     {
         try {
             $data = $this->form->getState();
+
+        if(auth()->user()->user_type == "office" OR auth()->user()->user_type =="employee" )
+        {
+            $user=User::where('id',auth()->user()->id)->first();
+            $office_id=$user->manager_id;
+        }else{
+            $office_id= auth()->user()->id;
+
+        }
+
+            $data['office_id'] = $office_id;
+
+
+            $setting =Setting::where('office_id',$office_id)->first();
+            if($setting){
+                 $setting->update($data);
+            }else{
+                Setting::create($data);
+            }
  
              
-            //var_dump($data);
-
-            Setting::latest()->first()->update($data);
-
+            
         } catch (Halt $exception) {
             return;
         }

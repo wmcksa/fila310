@@ -6,6 +6,7 @@ use App\Filament\Resources\BanerResource\Pages;
 use App\Filament\Resources\BanerResource\RelationManagers;
 use App\Models\Baner;
 use App\Models\Lang;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -48,22 +49,27 @@ class BanerResource extends Resource
 
     public static function form(Form $form): Form
     {
+        if(auth()->user()->user_type == "office" OR auth()->user()->user_type =="employee" )
+        {
+            $user=User::where('id',auth()->user()->id)->first();
+            $office_id=$user->manager_id;
+        }else{
+            $office_id= auth()->user()->id;
+
+        }
+
         return $form
             ->schema([
                 //
-
-                Hidden::make('office_id')->default(Auth::id()),
-               
+                Hidden::make('office_id')->default($office_id),
                 FileUpload::make('image')->disk('public')->directory('baners') ->imageEditor()->translateLabel(),
                 Select::make('lang')
                 ->options(
-                    
-                    Lang::all()->pluck('name','code')
+                    Lang::where('office_id',$office_id)->pluck('name','code')
                     
                 )->required()->label("lang")->searchable()->translateLabel(),
 
-
-
+                
 
 
 
@@ -112,12 +118,12 @@ class BanerResource extends Resource
     
     public static function getEloquentQuery(): Builder
         {
-            if(auth()->user()->user_type =="office"){
-                return static::getModel()::query()->where('office_id', auth()->user()->id);
+            if(auth()->user()->user_type =="office" OR auth()->user()->user_type =="employee"){
+                $user=User::where('id',auth()->user()->id)->first();
+                return static::getModel()::query()->where('office_id',$user->manager_id );
             }
             else{
-                return static::getModel()::query();
-                
+                return static::getModel()::query()->where('office_id', auth()->user()->id);
             }
             
         }
@@ -129,4 +135,9 @@ class BanerResource extends Resource
         return 
         __('nav_baners');
     }
+
+    public static function getModelLabel(): string
+        {
+            return __('nav_baners');
+        }  
 }

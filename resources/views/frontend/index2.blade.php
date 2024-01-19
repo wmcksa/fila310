@@ -23,7 +23,10 @@
     <!--favicon-->
     <link rel="shortcut icon" href="{{asset('assets/imgs/logo.png')}} " type="image/x-icon">
 
-    <!--style-->
+
+
+
+    
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
     <title>استقدام</title>

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\LangResource\Pages;
 use App\Filament\Resources\LangResource\RelationManagers;
 use App\Models\Lang;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -47,10 +48,18 @@ class LangResource extends Resource
 
     public static function form(Form $form): Form
     {
+        if(auth()->user()->user_type == "office" OR auth()->user()->user_type =="employee" )
+        {
+            $user=User::where('id',auth()->user()->id)->first();
+            $office_id=$user->manager_id;
+        }else{
+            $office_id= auth()->user()->id;
+
+        }
         return $form
             ->schema([
                 //
-                Hidden::make('office_id')->default(Auth::id()),
+                Hidden::make('office_id')->default($office_id),
 
                 TextInput::make('name')->required()->translateLabel(),
                 TextInput::make('code')->required()->translateLabel(),
@@ -105,16 +114,22 @@ class LangResource extends Resource
 }
 
 public static function getEloquentQuery(): Builder
-                {
-                    if(auth()->user()->user_type =="office"){
-                        return static::getModel()::query()->where('office_id', auth()->user()->id);
-                    }
-                    else{
-                        return static::getModel()::query();
-                        
-                    }
-                    
-                }
+        {
+            if(auth()->user()->user_type =="office" OR auth()->user()->user_type =="employee"){
+                $user=User::where('id',auth()->user()->id)->first();
+                return static::getModel()::query()->where('office_id',$user->manager_id );
+            }
+            else{
+                return static::getModel()::query()->where('office_id', auth()->user()->id);
+            }
+            
+        }
+
+
+    public static function getModelLabel(): string
+        {
+            return __('lang');
+        }  
 
 
 

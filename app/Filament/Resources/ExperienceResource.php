@@ -6,6 +6,7 @@ use App\Filament\Resources\ExperienceResource\Pages;
 use App\Filament\Resources\ExperienceResource\RelationManagers;
 use App\Models\Experience;
 use App\Models\Lang;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,6 +18,7 @@ use Filament\Resources\Concerns\Translatable;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Hidden;
 use Auth;
+use Filament\Forms\Components\Select;
 
 class ExperienceResource extends Resource
 {
@@ -27,28 +29,36 @@ class ExperienceResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Settings';
 
-    public static   function shouldRegisterNavigation(): bool
-    {
+    // public static   function shouldRegisterNavigation(): bool
+    // {
 
-        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
+    //     return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
 
-    }
+    // }
 
     
     public static function form(Form $form): Form
     {
+        if(auth()->user()->user_type == "office" OR auth()->user()->user_type =="employee" )
+        {
+            $user=User::where('id',auth()->user()->id)->first();
+            $office_id=$user->manager_id;
+        }else{
+            $office_id= auth()->user()->id;
+
+        }
         return $form
             ->schema([
-                Hidden::make('office_id')->default(Auth::id()),
+                Hidden::make('office_id')->default($office_id),
 
                 Forms\Components\TextInput::make('experience')->translateLabel(),
                 
-                Forms\Components\Select::make('lang')
+                Select::make('lang')
                 ->options(
-
-                    Lang::all()->pluck('name','code')
+                    Lang::where('office_id',$office_id)->pluck('name','code')
                     
-                )->required()->label("language")->searchable()->translateLabel(),
+                )->required()->label("lang")->searchable()->translateLabel(),
+
             ]);
     }
 
@@ -115,16 +125,21 @@ class ExperienceResource extends Resource
 
 
     public static function getEloquentQuery(): Builder
-                {
-                    if(auth()->user()->user_type =="office"){
-                        return static::getModel()::query()->where('office_id', auth()->user()->id);
-                    }
-                    else{
-                        return static::getModel()::query();
-                        
-                    }
-                    
-                }
+        {
+            if(auth()->user()->user_type =="office" OR auth()->user()->user_type =="employee"){
+                $user=User::where('id',auth()->user()->id)->first();
+                return static::getModel()::query()->where('office_id',$user->manager_id );
+            }
+            else{
+                return static::getModel()::query()->where('office_id', auth()->user()->id);
+            }
+            
+        }
+
+    public static function getModelLabel(): string
+        {
+            return __('experiences_nav');
+        }  
 
 
 

@@ -49,10 +49,7 @@ class FrontendController extends Controller
         $experiences = Experience::where('lang',$lang_code)->get();
         $settings = Setting::first();
         $emps = User::where('user_type','employee')->get();
-        foreach ($cvs as $cv) {
-            $cv['final_status']= $this->get_cv_state($cv->id);
-
-            }
+        
 
 
 
@@ -109,25 +106,39 @@ public function test_join(){
         return view('frontend.login_ar',compact('settings'));
     }
 
-    public function index_ar( )
+    public function index_ar($id)
     {
+       $user = User::where(
+        [
+            "id" => $id,
+            "user_type" => "admin"
+        ])->first();
+
         $lang_code= $this->lang_code;
-        $baners = Baner::where('lang',$lang_code)->get();
-        $follow_ups = Follow_up::get();
-        $cvs=Cv::where('lang',$lang_code)->where('blocked',0)->get();
-        $countries = Country::where('lang',$lang_code)->get();
-        $jobs= Job::where('lang',$lang_code)->get();
-        $types_of_estgdam = Type_of_estgdam::where('lang',$lang_code)->get();
-        $religions = Religion::where('lang',$lang_code)->get();
-        $branches = Branch::where('lang',$lang_code)->get();
-        $experiences = Experience::where('lang',$lang_code)->get();
-        $settings = Setting::first();
-        $emps = User::where('user_type','employee')->get();
+        $baners = Baner::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+        $follow_ups = Follow_up::where('office_id',$user->id)->get();
+        $cvs=Cv::where(['lang'=>$lang_code,'office_id'=>$user->id,'blocked'=>0])->get();
+
+        $countries = Country::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+        $jobs= Job::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+
+        $types_of_estgdam = Type_of_estgdam::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+
+        $religions = Religion::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+
+        $branches = Branch::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+
+        $experiences = Experience::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+
+        $settings = Setting::where('office_id',$user->id)->first();
+
+        $emps = User::where(['user_type'=>'employee','manager_id'=>$id])->get();
+
         foreach ($cvs as $cv) {
-            $cv['final_status']= $this->get_cv_state($cv->id);
+            $cv['final_status']= $this->get_cv_state($cv->id,$user);
             }
 
-          return view('frontend.index_ar',compact('settings','experiences','baners','follow_ups','cvs','countries','jobs','types_of_estgdam','religions','branches','emps'));
+          return view('frontend.index_ar',compact('settings','experiences','baners','follow_ups','cvs','countries','jobs','types_of_estgdam','religions','branches','emps','user'));
         //return view('frontend.index',compact('settings','experiences','baners','follow_ups','cvs','countries','jobs','types_of_estgdam','religions','branches','emps'));
     }
 
@@ -136,235 +147,90 @@ public function test_join(){
 
     public function search_ar(Request $request)
     {
-
-
-//         $orders = Order::query();
-//         if($request->filled('id')){
-//         $orders = $orders->where('id', $request->id);
-//         }
-//         if($request->filled('from')){
-//             $orders = $orders->whereDate('created_at', '>=', Carbon::parse($request->from));
-//         }
-//         if($request->filled('to')){
-//             $orders = $orders->whereDate('created_at', '<=', Carbon::parse($request->to));
-//         }
-//         if($request->filled('status')){
-//             $orders = $orders->where('status', $request->status);
-//         }
-//         if($request->filled('payment_way')){
-//             $orders = $orders->where('payment_way', $request->payment_way);
-//         }
-//         if($request->filled('commission_payment')){
-//             $orders = $orders->where('commission_payment', $request->commission_payment);
-//         }
-//         if($request->filled('client_id')){
-//             $orders = $orders->where('client_id', $request->client_id);
-//         }
-//         if($request->filled('company_id')){
-//         $orders = $orders->where('company_id', $request->company_id);
-//         }
-// //        if($request->has('product_size')){
-// //            $orders = $orders->where('size', $request->product_size);
-// //        }
-// //        if($request->has('product_state')){
-// //            $orders = $orders->where('', $request->company_id);
-// //        }
-//         $orders = $orders->orderBy('created_at','desc')->paginate(10);
-
-
-
-
-
-        dd($request->all());
+        // dd($request->all());
+        $user = User::where("id",$request->office_id)->first();
         $lang_code= $this->lang_code;
-        //echo "search";
-        $age_range= explode("-", $requet->age_range)  ;
-        $age_from=$age_range[0];
-        $age_to=$age_range[1];
-        try {
-            $fiter = $requet->validate([
-                'country_id'=>'required',
-                'job_id'=>'required',
-                'type_of_estgdam_id'=>'required',
-                'religion_id'=>'required',
-            ]);
-            $cvs = Cv::query();
-     if($requet->job_id !=="0"){
-
-    $cvs->where('job_id',$requet->job_id)->
-    where('blocked',0);
-    //echo "jop id condition hit ";
 
 
- }
- else{
-    //echo "jop id condition not hit ";
-
- }
-
- if($requet->country_id !=="0"){
-    
-    $cvs->where('country_id',$requet->country_id);
- }
-
- if($requet->type_of_estgdam_id !=="0"){
-    
-    $cvs->where('type_of_estgdam_id',$requet->type_of_estgdam_id);
- }
-
-
- if($requet->religion_id !=="0"){
-    
-    $cvs->where('religion_id',$requet->religion_id);
- }
-
-
- if($requet->experience_id !=="0"){
-    
-    $cvs ->where('experience_id',$requet->experience_id);
- }
-
-                $cvs->where('lang',$lang_code)
-                ->whereBetween('age', [$age_from, $age_to]);
-
-                
-
-$cvs=$cvs->get();
-                 
-
-                //$cvs = Cv::query()->get();
-
-                /*
-                $countries = Country::all();
-                $jobs= Job::all();
-                $types_of_estgdam = Type_of_estgdam::all();
-                $religions = Religion::all();
-               
-*/
-
-$follow_ups = Follow_up::all();
-
-
-
-
-                $countries = Country::
-                where('lang',$lang_code)->
-                get();
+        $cvs = Cv::query();
+        if($request->filled('country_id')){
+        $cvs = $cvs->where('country_id', $request->country_id);
+        }
         
-        
-                $jobs= Job::
-                where('lang',$lang_code)->
-                get();
-        
-        
-        
-                $types_of_estgdam = Type_of_estgdam::
-                where('lang',$lang_code)->
-                get();
-        
-                $religions = Religion::
-                where('lang',$lang_code)->
-                get();
-        
-        
-                $branches = Branch::
-                where('lang',$lang_code)->
-                get();
-        
-
-
-
-                $baners = Baner::
-                where('lang',$lang_code)->
-                get();
-
-
-                $emps = User::where('user_type','employee')->get();
-
-
-                $experiences = Experience::
-                where('lang',$lang_code)->
-                get();
-
-
-                $settings = Setting::
-     
-                first();
-        
-
-                //return $cvs;
-
-                return view('frontend.index_ar',compact('settings','experiences','emps','baners','follow_ups','cvs','countries','jobs','types_of_estgdam','religions','branches'));
-                //return view('frontend.index',compact('settings',experiences','emps','baners','follow_ups','cvs','countries','jobs','types_of_estgdam','religions','branches'));
-
-
-
-
-
-
-
-
-            } 
-
-        catch (\Throwable $th) {
-
-            echo $th;
-            
-            echo '<script type="text/javascript">
-                
-            alert("    لم يتم العثور على نتائج   ");
-           
-            window.history.back();
-            </script>
-            
-            ';
-
-
-         //sleep(3000);
-
-            //return redirect()->route('home');
-
+        if($request->filled('job_id')){
+            $cvs = $cvs->where('job_id', $request->job_id)->where('blocked',0);
+        }
+        if($request->filled('experience_id')){
+            $cvs = $cvs->where('experience_id', $request->experience_id);
+        }
+        if($request->filled('type_of_estgdam_id')){
+            $cvs = $cvs->where('type_of_estgdam_id', $request->type_of_estgdam_id);
+        }
+        if($request->filled('religion_id')){
+            $cvs = $cvs->where('religion_id', $request->religion_id);
         }
 
+        if($request->filled('age_range')){
+
+        $age_range= explode("-", $request->age_range)  ;
+        $age_from=$age_range[0];
+        $age_to=$age_range[1];
+        $cvs = $cvs->whereBetween('age', [$age_from, $age_to]);
+        }
+    
+        
+        $cvs = $cvs->orderBy('created_at','desc')->where(['lang'=>$lang_code,'office_id'=>$user->id])->paginate(10);
+
+
+
+
+
+
+
+        $baners = Baner::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+        $follow_ups = Follow_up::where('office_id',$user->id)->get();
+
+        $countries = Country::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+        $jobs= Job::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+
+        $types_of_estgdam = Type_of_estgdam::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+
+        $religions = Religion::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+
+        $branches = Branch::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+
+        $experiences = Experience::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
+
+        $settings = Setting::where('office_id',$user->id)->first();
+
+        $emps = User::where(['user_type'=>'employee','manager_id'=>$user->id])->get();
+
+        foreach ($cvs as $cv) {
+            $cv['final_status']= $this->get_cv_state($cv->id,$user);
+            }
+                return view('frontend.index_ar',compact('settings','experiences','emps','baners','follow_ups','cvs','countries','jobs','types_of_estgdam','religions','branches','user'));
+                //return view('frontend.index',compact('settings',experiences','emps','baners','follow_ups','cvs','countries','jobs','types_of_estgdam','religions','branches'));
+
+            
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    public function get_cv_state($cv_id){
-
+    public function get_cv_state($cv_id,$user){
         try {
-        $cv_fp=Follow_up::where('cv_id',$cv_id)->orderBy('id', 'DESC')->first();
-        
+            $cv_fp=Follow_up::where(['cv_id'=>$cv_id,'office_id'=>$user->id])->orderBy('id', 'DESC')->first();
+            if (is_null($cv_fp))
+            {
 
-        if (is_null($cv_fp))
-        {
+                return "";
+            }
 
-            return "";
-        }
-
-        else{
-
-            $status=Status::where('id',$cv_fp->status_id)->first();
-            return   $status->name;
-        
-
-        }
-
+            else{
+                $status=Status::where(['id'=>$cv_fp->status_id,'office_id'=>$user->id])->first();
+                return   $status->name;
+            }
        
         }
           catch(Exception $e) {
-           
 
             return "";
           }
@@ -372,14 +238,8 @@ $follow_ups = Follow_up::all();
 
     }
 
-
-
-
-
-
     public function   insert_login_user(Request $request)
     {
-
 
         //echo "insert_login_user ok";
         
@@ -390,13 +250,5 @@ $follow_ups = Follow_up::all();
         return redirect()->route('index_ar');
 
     }
-
-  
-
-
-
-
-
-
 
 }

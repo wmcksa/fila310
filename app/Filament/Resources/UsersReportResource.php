@@ -6,6 +6,7 @@ use App\Filament\Resources\UsersReportResource\Pages;
 use App\Filament\Resources\UsersReportResource\RelationManagers;
 use App\Models\UsersReport;
 use App\Models\Cv;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -66,8 +67,6 @@ class UsersReportResource extends Resource
 //$record->id
                     $cvs = Cv::where('user_id',$record->id)->get();
                     //return $cvs->name."";
-
-
                     //return  $cvs;
                    
                     return    count($cvs);
@@ -144,16 +143,21 @@ public static function getNavigationLabel(): string
 
 
 public static function getEloquentQuery(): Builder
-                {
-                    if(auth()->user()->user_type =="office"){
-                        return static::getModel()::query()->where('office_id', auth()->user()->id);
-                    }
-                    else{
-                        return static::getModel()::query();
-                        
-                    }
-                    
-                }
+{
+    if(auth()->user()->user_type =="office" OR auth()->user()->user_type =="employee"){
+        $user=User::where('id',auth()->user()->id)->first();
+        return static::getModel()::query()->where('office_id',$user->manager_id );
+    }
+    else{
+        return static::getModel()::query()->where('office_id', auth()->user()->id);
+    }
+    
+}
+
+                public static function getModelLabel(): string
+        {
+            return __('nav_users_report');
+        }  
 
 
 

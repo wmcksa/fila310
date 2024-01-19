@@ -6,6 +6,7 @@ use App\Filament\Resources\ReligionResource\Pages;
 use App\Filament\Resources\ReligionResource\RelationManagers;
 use App\Models\Religion;
 use App\Models\Lang;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,6 +18,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Hidden;
 use Auth;
+use Filament\Forms\Components\Select;
 
 class ReligionResource extends Resource
 {
@@ -45,18 +47,27 @@ class ReligionResource extends Resource
 
     public static function form(Form $form): Form
     {
+        if(auth()->user()->user_type == "office" OR auth()->user()->user_type =="employee" )
+        {
+            $user=User::where('id',auth()->user()->id)->first();
+            $office_id=$user->manager_id;
+        }else{
+            $office_id= auth()->user()->id;
+
+        }
         return $form
             ->schema([
                 //
-                Hidden::make('office_id')->default(Auth::id()),
+                Hidden::make('office_id')->default($office_id),
 
                 TextInput::make('name')->required()->translateLabel(),
 
-                Forms\Components\Select::make('lang')
+                Select::make('lang')
                 ->options(
-                    Lang::all()->pluck('name','code')
+                    Lang::where('office_id',$office_id)->pluck('name','code')
                     
-                )->required()->label("language")->searchable()->translateLabel(),
+                )->required()->label("lang")->searchable()->translateLabel(),
+
 
 
             ]);
@@ -107,15 +118,20 @@ class ReligionResource extends Resource
     }
 
     public static function getEloquentQuery(): Builder
-                {
-                    if(auth()->user()->user_type =="office"){
-                        return static::getModel()::query()->where('office_id', auth()->user()->id);
-                    }
-                    else{
-                        return static::getModel()::query();
-                        
-                    }
-                    
-                }
+        {
+            if(auth()->user()->user_type =="office" OR auth()->user()->user_type =="employee"){
+                $user=User::where('id',auth()->user()->id)->first();
+                return static::getModel()::query()->where('office_id',$user->manager_id );
+            }
+            else{
+                return static::getModel()::query()->where('office_id', auth()->user()->id);
+            }
+            
+        }
+
+                public static function getModelLabel(): string
+        {
+            return __('Religions_nav');
+        }  
 
 }

@@ -11,6 +11,7 @@ use App\Models\Country;
 use App\Models\Type_of_estgdam;
 use App\Models\Religion;
 use App\Models\Lang;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -50,10 +51,18 @@ class CvResource extends Resource
 
     public static function form(Form $form): Form
     {
+        if(auth()->user()->user_type == "office" OR auth()->user()->user_type =="employee" )
+        {
+            $user=User::where('id',auth()->user()->id)->first();
+            $office_id=$user->manager_id;
+        }else{
+            $office_id= auth()->user()->id;
+
+        }
         return $form
             ->schema([
 
-                Hidden::make('office_id')->default(Auth::id()),
+                Hidden::make('office_id')->default($office_id),
                 Hidden::make('user_id')->default(Auth::id()),
 
 
@@ -64,7 +73,7 @@ class CvResource extends Resource
                 Select::make('job_id')
                     ->options(
 
-                        Job::all()->pluck('name','id')
+                        Job::where('office_id',$office_id)->pluck('name','id')
                         
                     )->required()->label("Job")->searchable()->translateLabel(),
 
@@ -75,7 +84,7 @@ class CvResource extends Resource
                 Select::make('country_id')
                     ->options(
 
-                        Country::all()->pluck('country','id')
+                        Country::where('office_id',$office_id)->pluck('country','id')
                         
                     )->required()->label("country")->searchable()->translateLabel(),
 
@@ -88,7 +97,7 @@ class CvResource extends Resource
                 Select::make('type_of_estgdam_id')
                 ->options(
 
-                    Type_of_estgdam::all()->pluck('name','id')
+                    Type_of_estgdam::where('office_id',$office_id)->pluck('name','id')
                     
                 )->required()->label("Type")->searchable()->translateLabel(),
 
@@ -96,7 +105,7 @@ class CvResource extends Resource
                 Select::make('religion_id')
                 ->options(
 
-                    Religion::all()->pluck('name','id')
+                    Religion::where('office_id',$office_id)->pluck('name','id')
                     
                 )->required()->label("Religion")->searchable()->translateLabel(),
 
@@ -106,10 +115,21 @@ class CvResource extends Resource
                 Select::make('experience_id')
                 ->options(
 
-                    Experience::all()->pluck('experience','id')
+                    Experience::where('office_id',$office_id)->pluck('experience','id')
                     
                 )->required()->label("Experience")->searchable()->translateLabel(),
+                
                 TextInput::make('experienceLocation')->translateLabel(),
+                TextInput::make('code')->translateLabel(),
+                TextInput::make('phone')->translateLabel(),
+
+
+                Select::make('education')
+                ->options([
+                    'ابتدائي' => 'ابتدائي',
+                    'متوسط' => 'متوسط',
+                    'ثانوي' => 'ثانوي',
+                ])->required()->label("Education")->searchable()->translateLabel(),
 
 
 
@@ -129,9 +149,7 @@ class CvResource extends Resource
                 
                 Select::make('lang')
                 ->options(
-
-                   
-                    Lang::all()->pluck('name','code')
+                    Lang::where('office_id',$office_id)->pluck('name','code')
                     
                 )->required()->label("lang")->searchable()->translateLabel(),
 
@@ -297,16 +315,21 @@ public static function getNavigationLabel(): string
 }
 
 public static function getEloquentQuery(): Builder
-                {
-                    if(auth()->user()->user_type =="office"){
-                        return static::getModel()::query()->where('office_id', auth()->user()->id);
-                    }
-                    else{
-                        return static::getModel()::query();
-                        
-                    }
-                    
-                }
+        {
+            if(auth()->user()->user_type =="office" OR auth()->user()->user_type =="employee"){
+                $user=User::where('id',auth()->user()->id)->first();
+                return static::getModel()::query()->where('office_id',$user->manager_id );
+            }
+            else{
+                return static::getModel()::query()->where('office_id', auth()->user()->id);
+            }
+            
+        }
+
+    public static function getModelLabel(): string
+        {
+            return __('Cv_nav');
+        }  
 
 
 }
