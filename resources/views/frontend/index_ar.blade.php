@@ -245,13 +245,13 @@
                                     <div class="form-group"    hidden  >
                                         <input name="office_id" id="office_id" type="text" class="form-control"  dir="rtl" required>
                                     </div>
-                                    <div class="form-group" dir="rtl" >
+                                    <div class="form-group" dir="rtl" style="padding:3px;" >
                                     <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" الاسم" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="padding:3px;">
                                         <input name="phone" id="model_phone_id" type="number" class="form-control" placeholder="رقم جوالك" dir="rtl" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="padding:3px;">
                                         <select name="branch_id" class="form-control" >
                                             <option value="0">اختر الفرع (اختياري)</option>
                                     @foreach ($branches as $branch)
@@ -261,7 +261,7 @@
                                     @endforeach
                                 </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="padding:3px;">
                                     <select name="user_id" class="form-control" >
                                         <option value="0">اختر الموضف (اختياري)</option>
                                 @foreach ($emps as $emp)
@@ -277,7 +277,9 @@
                                 </div>
                                 <br>
                                 <br>
-                                    <button type="submit" class="btn btn-primary">طلب عبر وتساب</button>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary" style="padding: 5px;">طلب عبر وتساب</button>
+                                </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
