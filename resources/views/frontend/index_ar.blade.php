@@ -236,75 +236,65 @@
                                 <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel"> </h5>
 
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form dir="rtl"  method="post" action="{{config('app.url'); }}/api/make_cv_order">
-                                        <div class="form-group"    hidden  >
-                                            <input name="cv_id" id="cv_id" type="text" class="form-control"  dir="rtl" required>
-                                        </div>
-                                        <div class="form-group"    hidden  >
-                                            <input name="office_id" id="office_id" type="text" class="form-control"  dir="rtl" required>
-                                        </div>
-                                        <div class="form-group" dir="rtl" style="padding:3px;" >
-                                        <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" الاسم" required>
-                                        </div>
-                                        <div class="form-group" style="padding:3px;">
-                                            <input name="phone" id="model_phone_id" disabled type="number" class="form-control" placeholder="رقم جوالك" dir="rtl" required>
-                                        </div>
-                                        <div class="form-group" style="padding:3px;">
-                                            <select name="branch_id" class="form-control" >
-                                                <option value="0">اختر الفرع (اختياري)</option>
-                                        @foreach ($branches as $branch)
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <form dir="rtl"  method="post" action="{{config('app.url'); }}/api/make_cv_order">
+                                    <div class="form-group"    hidden  >
+                                        <input name="cv_id" id="cv_id" type="text" class="form-control"  dir="rtl" required>
+                                    </div>
+                                    <div class="form-group"    hidden  >
+                                        <input name="office_id" id="office_id" type="text" class="form-control"  dir="rtl" required>
+                                    </div>
+                                    <div class="form-group" dir="rtl" >
+                                    <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" الاسم" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="phone" id="model_phone_id" type="number" class="form-control" placeholder="رقم جوالك" dir="rtl" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="branch_id" class="form-control" >
+                                            <option value="0">اختر الفرع (اختياري)</option>
+                                    @foreach ($branches as $branch)
 
                                         <option value="{{$branch->id}}">{{$branch->name}}</option>
 
-                                        @endforeach
-                                    </select>
-                                    </div>
-                                    <div class="form-group" style="padding:3px;">
-                                        <select name="user_id" class="form-control" >
-                                            <option value="0">اختر الموضف (اختياري)</option>
-                                    @foreach ($emps as $emp)
-                                    <option value="{{$emp->id}}">{{$emp->name}}</option>
                                     @endforeach
                                 </select>
                                 </div>
                                 <div class="form-group">
                                     <select name="user_id" class="form-control" >
-                                        <option value="0">ليس لدي تاشيرة</option>
-                                        <option value="1">لدي تأشيرة</option>
-                                    </select>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary" style="padding: 5px;">طلب عبر وتساب</button>
-                                    </div>
-                                    </form>
+                                        <option value="0">اختر الموضف (اختياري)</option>
+                                @foreach ($emps as $emp)
+                                <option value="{{$emp->id}}">{{$emp->name}}</option>
+                                @endforeach
+                            </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="user_id" class="form-control" >
+                                    <option value="0">ليس لدي تاشيرة</option>
+                                    <option value="1">لدي تأشيرة</option>
+                                </select>
                                 </div>
-                                <div class="modal-footer">
-                                </div>
+                                <br>
+                                <br>
+                                    <button type="submit" class="btn btn-primary">طلب عبر وتساب</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
                             </div>
                         </div>
-                    </div>   
-                    
-                    
-                    @endforeach
-                    
-                  
+                    </div>
                 </div>
-            </div>
-        </section>
-    </div>
 
-    @else
-  @if(Session::has('message'))
-<p class="alert text-center {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-@endif
-  @endisset
+                
+                @endforeach
+            </div>
+        </div>
+    </section>
+</div>
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('assets/js/fa-pro.js')}}"></script>
