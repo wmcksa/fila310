@@ -23,6 +23,7 @@ class User extends Authenticatable
         'phone',
         'password',
         'user_type',
+        'manager_id'
 
     ];
 

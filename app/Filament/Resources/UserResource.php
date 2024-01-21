@@ -43,16 +43,19 @@ class UserResource extends Resource
         if(auth()->user()->user_type == "office" OR auth()->user()->user_type =="employee" )
         {
             $user=User::where('id',auth()->user()->id)->first();
-            $manager_id=$user->manager_id;
+            $office_id=$user->manager_id;
         }else{
-            $manager_id= auth()->user()->id;
+            $office_id= auth()->user()->id;
 
         }
 
         return $form
             ->schema([
                 //
-                Hidden::make('manager_id')->default($manager_id),
+                
+
+                
+                Hidden::make('manager_id')->default($office_id),
 
                 TextInput::make('name')->required()->translateLabel(),
                 TextInput::make('email')->email()->unique(ignoreRecord:true)->translateLabel(),
@@ -69,6 +72,11 @@ class UserResource extends Resource
                 TextInput::make('password')->password()->required()->translateLabel(),
             ]);
     }
+    
+    
+    
+    
+     
 
     public static function table(Table $table): Table
     {
@@ -136,10 +144,10 @@ class UserResource extends Resource
         {
             if(auth()->user()->user_type =="office" OR auth()->user()->user_type =="employee"){
                 $user=User::where('id',auth()->user()->id)->first();
-                return static::getModel()::query()->where('office_id',$user->manager_id );
+                return static::getModel()::query()->where('manager_id',$user->manager_id );
             }
             else{
-                return static::getModel()::query()->where('office_id', auth()->user()->id);
+                return static::getModel()::query()->where('manager_id', auth()->user()->id);
             }
             
         }

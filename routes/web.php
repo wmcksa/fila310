@@ -52,7 +52,7 @@ Route::get('/linkstorage', function () {
 Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->group(function () {
 
     //Route::get('/index_ar', 'index_ar')->name('index_ar');
-    Route::get('/index_ar/{id}', 'index_ar')->name('index_ar');
+    Route::get('/{id}', 'index_ar')->name('index_ar');
     Route::get('/login_ar', 'login_ar')->name('login_ar');
     Route::get('/', 'index')->name('index');
     Route::get('/all-workers', 'all_workers')->name('all_workers');
@@ -88,7 +88,7 @@ Route::controller(App\Http\Controllers\modeltes::class)->group(function () {
 Route::controller(App\Http\Controllers\Otp::class)->group(function () {
 
    
-    Route::get('/otp_ar/{id}','index_ar')->name('otp_ar');
+    Route::get('/otp/{id}','index_ar')->name('otp_ar');
     Route::get('/test_api','test_api');
     Route::post('/otp_get_code','get_code');
     Route::get('/otp_test_get_code','get_code');

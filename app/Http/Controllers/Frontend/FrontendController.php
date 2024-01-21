@@ -18,6 +18,7 @@ use App\Models\Loginuser;
 use App\Models\UsersReport;
 use App\Models\Baner;
 use App\Models\Setting;
+use Session;
 
 
 
@@ -29,51 +30,28 @@ class FrontendController extends Controller
 
 
 
-    public function index(){
-
-
+    public function index()
+    {
         return view('frontend.index2');
     }
 
-    public function all_workers(){
+    
+    public function test_join(){
+    $one= Cv::
+        join('jobs', 'cvs.job_id', '=', 'jobs.id')
+        ->join('countries', 'cvs.country_id', '=', 'countries.id')
+        ->join('follow_ups', 'cvs.id', '=', 'follow_ups.cv_id')
+        
+        ->select('cvs.*', 'jobs.name as job_name','countries.country')->get();
 
-        $lang_code= $this->lang_code;
-        $baners = Baner::where('lang',$lang_code)->get();
-        $follow_ups = Follow_up::get();
-        $cvs=Cv::where('lang',$lang_code)->where('blocked',0)->get();
-        $countries = Country::where('lang',$lang_code)->get();
-        $jobs= Job::where('lang',$lang_code)->get();
-        $types_of_estgdam = Type_of_estgdam::where('lang',$lang_code)->get();
-        $religions = Religion::where('lang',$lang_code)->get();
-        $branches = Branch::where('lang',$lang_code)->get();
-        $experiences = Experience::where('lang',$lang_code)->get();
-        $settings = Setting::first();
-        $emps = User::where('user_type','employee')->get();
+        $two=$one->toQuery();
+        $three=$two->get();
+        return $one;
+        //return $three;
+
         
 
-
-
-        return view('frontend.all_workers',compact('settings','experiences','baners','follow_ups','cvs','countries','jobs','types_of_estgdam','religions','branches','emps'));
     }
-
-  
-
-public function test_join(){
-   $one= Cv::
-    join('jobs', 'cvs.job_id', '=', 'jobs.id')
-    ->join('countries', 'cvs.country_id', '=', 'countries.id')
-    ->join('follow_ups', 'cvs.id', '=', 'follow_ups.cv_id')
-    
-    ->select('cvs.*', 'jobs.name as job_name','countries.country')->get();
-
-    $two=$one->toQuery();
-    $three=$two->get();
-    return $one;
-    //return $three;
-
-     
-
-}
 
 
 
@@ -114,6 +92,8 @@ public function test_join(){
             "user_type" => "admin"
         ])->first();
 
+        if($user){
+
         $lang_code= $this->lang_code;
         $baners = Baner::where(['lang'=>$lang_code,'office_id'=>$user->id])->get();
         $follow_ups = Follow_up::where('office_id',$user->id)->get();
@@ -138,8 +118,14 @@ public function test_join(){
             $cv['final_status']= $this->get_cv_state($cv->id,$user);
             }
 
-          return view('frontend.index_ar',compact('settings','experiences','baners','follow_ups','cvs','countries','jobs','types_of_estgdam','religions','branches','emps','user'));
-        //return view('frontend.index',compact('settings','experiences','baners','follow_ups','cvs','countries','jobs','types_of_estgdam','religions','branches','emps'));
+            return view('frontend.index_ar',compact('settings','experiences','baners','follow_ups','cvs','countries','jobs','types_of_estgdam','religions','branches','emps','user'));
+
+        }
+        else{
+            Session::flash('message', 'لايوجد بيانات بهذا العنوان!'); 
+            Session::flash('alert-class', 'alert-danger');
+            return view('frontend.index_ar');
+        }
     }
 
 

@@ -126,7 +126,6 @@ else{
     }
     else{
 
-
 $search_index=array_search($last_inserted_cv_order_user_id, $users_array);
 
        $last_inserted_cv_order_user_id=$users_array[$search_index+1];

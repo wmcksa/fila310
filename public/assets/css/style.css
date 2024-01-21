@@ -371,6 +371,17 @@ section {
   margin-left: 5px;
 }
 
+
+.links a:first-of-type {
+  padding-left: 10px;
+  margin-left: 10px;
+  border-left: 1px solid #707070;
+  color: #000;
+}
+
+
+
+
 /*card-2*/
 .card-2 {
   position: relative;

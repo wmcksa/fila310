@@ -54,23 +54,27 @@
                             <a class="nav-link active" aria-current="page" href="{{route('index')}}">الصفحة الرئيسية</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#about">من نحن</a>
+                            <a class="nav-link" href="#about">معلومات عنا</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#services">خدماتنا</a>
+                            <a class="nav-link" href="#services">مميزاتنا</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact-us.html">تواصل معنا</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('all_workers')}}">طلب استقدام</a>
-                        </li>
-
+                        
                     </ul>
 
                 </div>
+
+
+                <div class="col-lg-4 d-flex align-items-center justify-content-lg-end justify-content-center">
+                        <div class="links">
+                            <i class="fal fa-user"></i>
+                            <a href="{{url('admin/login')}}" class="sign-in">تسجيل الدخول</a>
+                            <a href="{{url('admin/register')}}" class="sign-up">حساب جديد</a>
+                        </div>
+                    </div>
+
+
             </div>
         </nav>
     </header>
@@ -93,30 +97,82 @@
     <!--main-slider-end-->
 
     <!--welcome-start-->
-    <section id="about" class="welcome">
+    <section id="about" class="services general-section">
+            <div class="container">
+                <div class="custom-head">
+                    <div class="heading">
+                    <h1>
+                        معلومات عن استقدم 
+                    </h1>
+                    
+                    </div>
+
+                    
+                </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-12 mb-3 custom-service-box">
+                <div class="service-box">
+                    
+
+                    <div class="contain">
+                    
+                    <p>
+                      مانقدمه يختلف تماما عن منافسينا فنحن نهتم بالاداء والجوده لتصل خدمه تفوف كل توقعاتكم وباستخدامك ل استقدم يساعدك في اختيار الايدي العامله المناسبه تعرف اكثر علي معلومات اكثر علي استقدم والذي يساعدك اكثر علي استقطاب العماله من الخارج ...
+
+ 
+
+                    </p>
+
+                    </div>
+                </div>
+                </div>
+
+                
+            </div>
+            </div>
+        </section>
+    <!--welcome-end-->
+
+
+    
+
+
+<!--welcome-start-->
+<section id="services" class="welcome">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 d-flex justify-content-center flex-column">
                     <h4 class="title-one">متخصصون في إستقدام وتوظيف الكوادر المهنية من جميع انحاء العالم</h4>
-                    <h6 class="text">
-                    خبرة أكثر من ١٥ عام في مجال إستقدام الكفاءات المهنية و العمالة المميزة لجميع الأنشطة التجارية ( المستشفيات و المراكز الطبية - الصالونات و المشاغل - الكافيهات و المطاعم - مراكز المساج و العلاج الطبيعي - شركات و مؤسسات المقاولات- الشركات و المؤسسات التجارية - الفنادق - شركات و مؤسسات النقل البري ) لجميع مدن و مناطق المملكة و لدول الخليج العربي.
-                    </h6>
+                    
                     <ul>
                         <li>
                             <i class="fal fa-chevron-right"></i>
-                            <p>شركة إستقدام معتمدة من وزارة الموارد البشرية بالمملكة العربية السعودية.</p>
+                            <p>إمكانية اضافة السير الذاتيه مفلترة حسب ( الدوله - المهنه -  نوع الاستقدام - الخبره - الديانه )</p>
                         </li>
                         <li>
                             <i class="fal fa-chevron-right"></i>
-                            <p>تقديم كافة الخدمات و الاستشارات للموارد البشرية ورواد الأعمال.</p>
+                            <p>إمكانية اضافة السير الذاتيه من قبل المكاتب الخارجية وكل مكتب له يوزر منفصل </p>
                         </li>
                         <li>
                             <i class="fal fa-chevron-right"></i>
-                            <p>عقود موثقة و مصدقة من البولو ( مكتب العمل الفلبيني بالرياض ) و السفارة الفلبينية بالرياض.</p>
+                            <p>اضافة موظفين  لاستلام طلبات العملاء </p>
                         </li>
                         <li>
                             <i class="fal fa-chevron-right"></i>
-                            <p>استقدام العمالة الفلبينية المهنية للشركات و المؤسسات و المستشفيات وغيرها.</p>
+                            <p>إمكانية تحديد موظف او فرع معين عن طلب سيرة ذاتية</p>
+                        </li>
+                        <li>
+                            <i class="fal fa-chevron-right"></i>
+                            <p>إمكانية  تجميع بيانات العملاء وإعادة استهدافهم </p>
+                        </li>
+                        <li>
+                            <i class="fal fa-chevron-right"></i>
+                            <p>تقارير خاصة بالموظفين لمتابعة ادائهم </p>
+                        </li>
+                        <li>
+                            <i class="fal fa-chevron-right"></i>
+                            <p>تقارير شاملة خاصة بالسير الذاتية </p>
                         </li>
                     </ul>
                     
@@ -130,194 +186,37 @@
     <!--welcome-end-->
 
 
-    <!-- section start -->
-		<!-- ================ -->
-		<section id="services" class="services general-section">
-        <div class="container">
-          <div class="custom-head">
-            <div class="heading">
-              <h1>
-                خدماتنا 
-              </h1>
-              <p>
-                نوفر خدماتنا لجميع مناطق المملكه
-              </p>
-            </div>
 
-            <a href="#" class="see-more primary-color">
-              <div class="icon-contain">
-                <img
-                  src="assets/images/icons/arrow.svg"
-                  loading="lazy"
-                  alt="" />
-              </div>
-
-              <span>
-                كل الخدمات
-              </span>
-            </a>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-6 col-12 mb-3 custom-service-box">
-              <div class="service-box">
-                <div class="image-content">
-                  <img
-                    src="assets/images/services/service_1.svg"
-                    loading="lazy"
-                    alt="" />
-                </div>
-
-                <div class="contain">
-                  <h2>
-                    تصميم الهوية التجارية
-                  </h2>
-
-                  <p>
-                    تعد الهوية البصرية من أهم عوامل نجاح كل
-                    المشاريع والمؤسسات، لذلك تهتم شركة
-                    تكنورافت بانشاء هوية بصرية مميزة
-                    ... لمشروعك من الصفر
-                  </p>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 col-12 mb-3 custom-service-box">
-              <div class="service-box">
-                <div class="image-content">
-                  <img
-                    src="assets/images/services/service_2.svg"
-                    loading="lazy"
-                    alt="" />
-                </div>
-
-                <div class="contain">
-                  <h2>
-                    تصميم وتطوير المواقع
-                  </h2>
-
-                  <p>
-                    موقعك الالكتروني هو واجهتك على الانترنت
-                    لذلك تهتم تكنورافت بإضفاء طابع خاص ومميز
-                    لموقعك الالكتروني، لتصل لعملائك بالشكل
-                    ... الذي يليق بك وبمشروعك
-                  </p>
-
-                  
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 col-12 mb-3 custom-service-box">
-              <div class="service-box">
-                <div class="image-content">
-                  <img
-                    src="assets/images/services/service_3.svg"
-                    loading="lazy"
-                    alt="" />
-                </div>
-
-                <div class="contain">
-                  <h2>
-                    تصميم وتطوير التطبيقات
-                  </h2>
-
-                  <p>
-                    تقدم تكنورافت خدمة تصميم وتطوير تطبيقات
-                    الهواتف الذكية، لتساعد في تحقيق أهداف
-                    مشروعك، وذلك مع ضمان تصميم
-                    ... التطبيق مميز و التكويد
-                  </p>
-
-                  
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 col-12 mb-3 custom-service-box">
-              <div class="service-box">
-                <div class="image-content">
-                  <img
-                    src="assets/images/services/service_4.svg"
-                    loading="lazy"
-                    alt="" />
-                </div>
-
-                <div class="contain">
-                  <h2>
-                    تصميم وتطوير أنظمة إدارة ومحاسبة
-                  </h2>
-
-                  <p>
-                    تقدم شركة تكنورافت خدمة تحليل متكامل
-                    للشركات و المؤسسات، و من ثم تصميم
-                    ... و تطوير نظام إداري للشركة
-                  </p>
-
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+    <footer class="text-center bg-body-tertiary">
+        <!-- Grid container -->
+        <div class="container pt-4">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                    <!-- Facebook -->
+                    <a data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-body m-1"href="https://www.facebook.com/wmcksa"role="button"data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+                    <!-- Twitter -->
+                    <a
+                        data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-body m-1"href="https://twitter.com/WMC_ksa"role="button"data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+                    <!-- Instagram -->
+                    <a
+                        data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-body m-1"href="https://wmc-ksa.com/"role="button"data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+                    <!-- Linkedin -->
+                    <a
+                        data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-body m-1"href="https://www.linkedin.com/in/wmc-for-marketing-5444b2257/"role="button"data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
+                    
+            </section>
+            <!-- Section: Social media -->
         </div>
-      </section>
-		<!-- section end -->
+        <!-- Grid container -->
 
-    <!--available-courses-start-->
-    
-    <!--available-courses-end-->
-
-    <!--footer-start-->
-    <!-- <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="about">
-                        <img src="assets/imgs/logo.svg" alt="logo" class="logo">
-                        
-                        <div class="social">
-                            <a href="#" target="_blank" class="icon insta">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" target="_blank" class="icon face">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                            <a href="#" target="_blank" class="icon twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" target="_blank" class="icon paypal">
-                                <i class="fab fa-paypal"></i>
-                            </a>
-                            <a href="#" target="_blank" class="icon zoom">
-                                <i class="fas fa-video"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6">
-                    <div class="contact-us">
-                        <i class="fal fa-headset"></i>
-                        <div class="text">
-                            <p>للاستفسار ؟ تواصل معنا</p>
-                            <h5 class="call-links">
-                                <a href="tel:(0600)874548" dir="ltr">(0600) 874 548</a>
-                                <span>,</span>
-                                <a href="tel:(800)80018588" dir="ltr">(800) 8001 8588</a>
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="our-contact-info">
-                        <h5>معلومات التواصل</h5>
-                        <p>الخبر , المملكه العربيه السعوديه </p>
-                    </div>
-                </div>
-            </div>
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+            النافذه للتسويق - جميع الحقوق محفوظه
+            <a class="text-body" href="https://wmc-ksa.com/">النافذه للتسويق الالكتروني</a>
         </div>
-        
-    </footer> -->
+        <!-- Copyright -->
+</footer>
+
     <!--footer-end-->
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -385,6 +284,57 @@
             }
         })
     </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript">
+    
+      //  alert("wwe");
+        //return true; // prevents browser error messages  
+        //  localStorage.setItem("verified", "0");
+        $('#ddd').on('show.bs.modal', function (event) {
+                if(localStorage.getItem("verified")=="1"){
+                  //$('#exampleModal').modal('toggle');
+                }
+                  else{
+                    
+                      var office_id = $(event.relatedTarget).data('office_id');
+                      alert(office_id);
+                      window.location.href = '/otp_ar/'+office_id;
+                      
+                    //   $('#ddd').modal('toggle');
+                  }
+           
+            
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var recipient = button.data('cv_id') // Extract info from data-* attributes
+                var office_id = button.data('office_id') // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                
+              //alert(recipient)
+                
+                var modal = $(this)
+                //modal.find('.modal-title').text('New message to ' + recipient)
+                modal.find('.modal-body #cv_id').val(recipient)
+                modal.find('.modal-body #office_id').val(office_id)
+                modal.find('.modal-body #model_phone_id').val(localStorage.getItem("phone"))
+        })
+  </script>
+    
+    
+    
+    
+    
+    
+    
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

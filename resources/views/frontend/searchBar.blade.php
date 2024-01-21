@@ -77,18 +77,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div data-mdb-input-init class="form-outline">
-                                            <input name="code"  id="name_id" class="form-control" type="text"      placeholder="كود السيره الذاتيه">
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                    <div data-mdb-input-init class="form-outline">
-                                        <input name="phone"  id="name_id" class="form-control" type="text"      placeholder="رقم الهاتف">
-                                    </div>
-                                    </div>
-                                </div>
+                                
 
 
 

@@ -145,7 +145,7 @@ var $international_phone_number;
 
 					//alert("phone"+$international_phone_number);
 					alert("تمت عملية التحقق بنجاح");
-					window.location.href = '/index_ar/'+office_id;
+					window.location.href = '/'+office_id;
 
 				}
 				else{

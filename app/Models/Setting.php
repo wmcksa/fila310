@@ -13,4 +13,12 @@ class Setting extends Model
         'cv_update_time','cv_update_time2','site_name','site_url','phone','logo','website_login_form','office_id'];
     
     protected $guarded = []; 
+    
+    
+    public function getLogoAttribute(){
+        if($this->attributes['logo']){
+        return url('storage').'/'.$this->attributes['logo'];
+        }else{
+        }
+    }
 }
