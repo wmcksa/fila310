@@ -1388,7 +1388,6 @@ section {
 /*footer-start*/
 footer {
   background-color: #fbfbfb;
-  padding-top: 60px;
 }
 
 footer .footer-title {
@@ -1415,89 +1414,21 @@ footer .about .social {
   flex-wrap: wrap;
 }
 
-footer .about .social a {
-  color: #fff;
-  background-color: var(--main-text);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-}
 
-footer .about .social a:not(:last-of-type) {
-  margin-left: 10px;
-}
 
-footer .about .social a.insta {
-  background-color: #e4405f;
-}
 
-footer .about .social a.face {
-  background-color: #1877f2;
-}
-
-footer .about .social a.twitter {
-  background-color: #1da1f2;
-}
-
-footer .about .social a.paypal {
-  background-color: #00457c;
-}
-
-footer .about .social a.zoom {
-  background-color: #2d8cff;
-}
-
-footer .about .social a i {
-  line-height: 1;
-}
-
-footer .links ul {
-  column-count: 2;
-}
-
-footer .links ul li:not(:last-of-type) {
-  margin-bottom: 10px;
-}
-
-footer .contact-us {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-footer .contact-us i {
-  font-size: 40px;
-  margin-left: 15px;
-}
-
-footer .our-contact-info h5 {
-  margin-bottom: 10px;
-}
-
-footer .contact-us .text p,
-footer .our-contact-info p {
-  color: var(--secondary-text);
-}
 
 footer .rights {
   color: #fff;
-  background-color: var(--main-color);
+  background-color: #5b5b5b;
   padding: 10px 0;
-  margin-top: 40px;
+  margin-top: 136px;
   font-size: 14px;
   font-weight: 400;
 }
 
 footer .rights .made-with p i {
-  color: #ff5023;
+  color: #ef7f1b;
   font-size: 14px;
   margin: 0 5px;
 }
@@ -1507,6 +1438,7 @@ footer .rights .made-with p a {
   text-decoration: underline;
 }
 /*footer-end*/
+
 
 /*----------media-start----------*/
 @media screen and (max-width: 1280px) {

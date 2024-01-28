@@ -21,12 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::controller(App\Http\Controllers\MakeCvOrder::class)->group(function () {
 
-    
-    Route::post('/make_cv_order','make_cv_order');
-
-});
 
 
 

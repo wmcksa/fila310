@@ -30,7 +30,7 @@ class Otp extends Controller
         LoginUser::create([
             "name"=>$request->name,
             "phone"=>$request->phone2,
-            // "office_id"=>$request->office_id
+            "office_id"=>$request->office_id
     ]);
        $rand= rand(1000,9999);
       $msg="your verification code is  ".$rand;

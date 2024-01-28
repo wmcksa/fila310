@@ -85,6 +85,14 @@ Route::controller(App\Http\Controllers\modeltes::class)->group(function () {
 });
 
 
+Route::controller(App\Http\Controllers\MakeCvOrder::class)->group(function () {
+
+    
+    Route::post('/make_cv_order','make_cv_order')->name('make_cv');
+
+});
+
+
 
 Route::controller(App\Http\Controllers\Otp::class)->group(function () {
 

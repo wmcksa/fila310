@@ -4,6 +4,7 @@
 <head>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.rtl.min.css')); ?>" />
+  
 
 <!--google-font-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +14,8 @@
 <!--owl-carousel-->
 <link rel="stylesheet" href="<?php echo e(asset('assets/css/owl.carousel.min.css')); ?>">
 <link rel="stylesheet" href="<?php echo e(asset('assets/css/owl.theme.default.css')); ?>">
+
+
 
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
@@ -246,7 +249,6 @@
                         
                     <!-- Modal -->
                     <div class="modal fade otp" id="<?php echo e($user->id); ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -257,12 +259,16 @@
                             </button>
                             </div>
                             <div class="modal-body">
-                                <form dir="rtl"  method="post" action="<?php echo e(config('app.url')); ?>/api/make_cv_order">
+                                <form dir="rtl"  method="post" action="<?php echo e(route('make_cv')); ?>">
+                                  <?php echo csrf_field(); ?>
                                     <div class="form-group"    hidden  >
-                                        <input name="cv_id" id="cv_id" type="text" class="form-control"  dir="rtl" required>
+                                        <input name="cv_id" id="cv_id"  type="text" class="form-control"  dir="rtl" required>
                                     </div>
                                     <div class="form-group"    hidden  >
                                         <input name="office_id" id="office_id" type="text" class="form-control"  dir="rtl" required>
+                                    </div>
+                                    <div class="form-group"    hidden  >
+                                        <input name="cv_country_id" value="<?php echo e($cv->country_id); ?>"  type="text" class="form-control"  dir="rtl" required>
                                     </div>
                                     <div class="form-group" dir="rtl" style="padding: 3px;" >
                                     <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" الاسم" required>
@@ -320,6 +326,51 @@
 <p class="alert text-center <?php echo e(Session::get('alert-class', 'alert-info')); ?>"><?php echo e(Session::get('message')); ?></p>
 <?php endif; ?>
 <?php endif; ?>
+
+<!--footer-start-->
+<footer>
+      <div class="rights">
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-md-6 d-flex align-items-center justify-content-md-start justify-content-center"
+            >
+              <div class="made-with text-center">
+                <p>
+                  قام بتصميمه <i class="fas fa-heart"></i> 
+                  <a href="https://wmc-ksa.com/home/index.php" target="_blank">النافذه للتسويق</a>
+                </p>
+                <p> استقدم- جميع الحقوق محفوظه</p>
+              </div>
+            </div>
+            <div
+              class="col-md-6 d-flex align-items-center justify-content-md-end justify-content-center"
+            >
+              <!-- <p>SAUDI MENU- All Rights Reserved</p> -->
+              <ul class="social-links">
+                  <li class="facebook">
+                    <a href="https://www.facebook.com/wmcksa" target="_blank">
+                      <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                  </li>
+                  <li class="twitter">
+                    <a href="https://twitter.com/WMC_ksa" target="_blank">
+                      <i class="fa-brands fa-twitter"></i>
+                    </a>
+                  </li>
+                  <li class="instagram">
+                    <a href="https://www.instagram.com/wmc_ksa" target="_blank">
+                      <i class="fa-brands fa-instagram"></i>
+                    </a>
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+</footer>
+<!--footer-end-->
+
     <script src="<?php echo e(asset('assets/js/jquery.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/bootstrap.bundle.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/fa-pro.js')); ?>"></script>

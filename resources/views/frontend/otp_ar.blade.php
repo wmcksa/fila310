@@ -73,7 +73,7 @@ input {
 						<form  id="myform1" action="" method="POST" class="login-form" onsubmit="process(event)" >
                             @csrf
                             
-                            <!-- <input type="hidden" value="{{2}}" name="office_id"> -->
+                            <input type="hidden" value="{{request()->segment(count(request()->segments()))}}" name="office_id">
                             
 							<div class="form-group">
 								<input    name="name"  id="name_id" class="form-control" type="text"      placeholder="الاسم  " required>
