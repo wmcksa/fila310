@@ -1,0 +1,1 @@
+@livewire('switch-filament-language')
