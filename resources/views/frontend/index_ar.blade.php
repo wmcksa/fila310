@@ -25,7 +25,6 @@
 <!--style-->
 <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 <style>
-
       .navbar-brand img {
         width: 80px;
       }
@@ -152,9 +151,13 @@
                                     <p class="price"> المهنه :</p><span>{{$cv->job->name}}</span>
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-center">
+                                    <p class="price"> الحاله :</p><span>@if($cv->final_status=="reserved") محجوز مؤقتا @elseif($cv->final_status=="") متاح @else متاح  @endif</span>
+                                    </div>
                                 <div class="text-center pt-2">
                                       <a class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$cv->id}}">مزيد من المعلومات</a>
-                                      <a href="#{{$user->id}}" data-bs-toggle="modal"  data-cv_id="{{$cv->id}}" data-office_id="{{$user->id}}" class="btn  p-2" style="background-color: #8d448b;color:#fff">طلب التواصل</a>
+                                      <a href="{{$cv->cv_file}}" class="btn btn-info p-2" >عرض السيره الذاتيه</a>
+                                      <a href="#{{$user->id}}" data-bs-toggle="modal"  data-cv_id="{{$cv->id}}" data-office_id="{{$user->id}}" class="btn  p-2" style="background-color: #8d448b;color:#fff;margin:3px;">طلب التواصل</a>
                                 </div>
                             </div>
                         </div>
@@ -204,12 +207,24 @@
                                                             <td>{{$cv->experience->experience}}</td>
                                                             </tr>
                                                             <tr>
+                                                            <th scope="col">مكان الخبره</th>
+                                                            <td>{{$cv->experienceLocation}}</td>
+                                                            </tr>
+                                                            <tr>
                                                             <th scope="col">نوع الاستقدام</th>
                                                             <td>{{$cv->name}}</td>
                                                             </tr>
                                                             <tr>
+                                                            <th scope="col">مستوي التعليم</th>
+                                                            <td>{{$cv->name}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <th scope="col">رسوم النقل</th>
+                                                            <td>{{$cv->transportFees}}</td>
+                                                            </tr>
+                                                            <tr>
                                                             <th scope="col">الحاله</th>
-                                                            <td>@if($cv->final_status=="reserved") قيد التفاوض مع عميل اخر @elseif($cv->final_status=="") متاح @else متاح  @endif</td>
+                                                            <td>@if($cv->final_status=="reserved") محجوز مؤقتا @elseif($cv->final_status=="") متاح @else متاح  @endif</td>
                                                             </tr>
                                                             
                                                         </tbody>
@@ -222,7 +237,7 @@
                                             </div>
                                         </div>
                                     <div class="modal-footer text-right">
-                                        <button type="button" class="btn btn-sm btn-default" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-sm btn-default" data-bs-dismiss="modal">اغلاق</button>
                                     </div>
                                 </div>
                             </div>
@@ -248,13 +263,13 @@
                                     <div class="form-group"    hidden  >
                                         <input name="office_id" id="office_id" type="text" class="form-control"  dir="rtl" required>
                                     </div>
-                                    <div class="form-group" dir="rtl" >
+                                    <div class="form-group" dir="rtl" style="padding: 3px;" >
                                     <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" الاسم" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="padding: 3px;">
                                         <input name="phone" id="model_phone_id" type="number" class="form-control" placeholder="رقم جوالك" dir="rtl" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="padding: 3px;">
                                         <select name="branch_id" class="form-control" >
                                             <option value="0">اختر الفرع (اختياري)</option>
                                     @foreach ($branches as $branch)
@@ -264,7 +279,7 @@
                                     @endforeach
                                 </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="padding: 3px;">
                                     <select name="user_id" class="form-control" >
                                         <option value="0">اختر الموضف (اختياري)</option>
                                 @foreach ($emps as $emp)
@@ -272,7 +287,7 @@
                                 @endforeach
                             </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="padding: 3px;">
                                 <select name="user_id" class="form-control" >
                                     <option value="0">ليس لدي تاشيرة</option>
                                     <option value="1">لدي تأشيرة</option>
@@ -280,7 +295,9 @@
                                 </div>
                                 <br>
                                 <br>
-                                    <button type="submit" class="btn btn-primary">طلب عبر وتساب</button>
+                                     <div class="text-center form-group" style="padding: 3px;">
+                                         <button type="submit" class="btn btn-primary" style="padding: 5px;">طلب عبر وتساب</button>
+                                    </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -295,6 +312,13 @@
         </div>
     </section>
 </div>
+
+@else
+
+@if(Session::has('message'))
+<p class="alert text-center {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+@endif
+@endisset
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('assets/js/fa-pro.js')}}"></script>

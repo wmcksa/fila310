@@ -1,6 +1,6 @@
 <div class="filament-hidden">
 
-![header](./.github/resources/header.png)
+![header](./.github/resources/pxlrbt-excel.png)
 
 </div>
 
@@ -19,7 +19,7 @@ Easily configure your Excel exports in Filament via a bulk or page action.
 
 <div class="filament-hidden">
 
-https://user-images.githubusercontent.com/22632550/174591523-831df501-76d5-456a-b12e-f6d8316fb673.mp4
+[Demo Video](https://user-images.githubusercontent.com/22632550/174591523-831df501-76d5-456a-b12e-f6d8316fb673.mp4  ':include :type=video controls width=100%')
 
 </div>
 
@@ -74,7 +74,7 @@ class UserResource extends Resource
 }
 ```
 
-**Example for table package**
+**Example for _separate_ table package**
 
 ```php
 <?php
@@ -90,6 +90,7 @@ public function getTableBulkActions()
     ];
 }
 ```
+
 
 ## Usage
 
@@ -267,7 +268,7 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 ExportAction::make()->exports([
     ExcelExport::make()->withColumns([
-        Column::make('currecy')->format(NumberFormat::FORMAT_CURRENCY_EUR_SIMPLE)
+        Column::make('currency')->format(NumberFormat::FORMAT_CURRENCY_EUR_SIMPLE)
     ]),
 ])
 ```

@@ -103,6 +103,17 @@ class EditSettings extends Page implements HasForms
                     
                 )->required()->label("website login form")->searchable(),
 
+                Select::make('recieve_orders_by_country')
+                ->options(
+
+                   [   "1"=>"Enabled",
+                       "0"=>"Disabled",
+                   
+                   
+                   ]
+                    
+                )->required()->label("recieve orders by country")->searchable(),
+
             ])
             ->statePath('data');
     } 

@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Auth;
 
 
@@ -34,7 +35,7 @@ class TypeOfEstgdamResource extends Resource
 
     public static   function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="admin"?true:false;
     }
 
 

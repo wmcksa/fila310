@@ -8215,6 +8215,10 @@ h1, h2, h3, h4, h5,
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out; }
+
+
+
+  
   @media (prefers-reduced-motion: reduce) {
     .form-control {
       -webkit-transition: none;
@@ -8328,8 +8332,9 @@ h1, h2, h3, h4, h5,
     top: 20px;
     left: 0;
     right: 0;
-    width: 50%;
+    width: 60%;
     margin: 0 auto; }
+    
     @media (max-width: 767.98px) {
       .form-group .submit {
         top: 0; } }

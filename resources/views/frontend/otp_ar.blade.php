@@ -1,7 +1,15 @@
+ <?php   
+ $setting = App\Models\Setting::where('office_id',request()->segment(count(request()->segments())))->first();
+ 
+
+
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>عالم الدقة</title>
+  	<title>{{$setting->site_name}} </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
@@ -13,6 +21,43 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
   />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <style>
+input {
+  outline: none;
+  padding: 12px;
+  border-radius: 3px;
+  border: 1px solid black;
+  background-color: aqua;
+}
+::-webkit-input-placeholder { /* Chrome */
+  color: red;
+  transition: opacity 250ms ease-in-out;
+}
+:focus::-webkit-input-placeholder {
+  opacity: 0.5;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: red;
+  transition: opacity 250ms ease-in-out;
+}
+:focus:-ms-input-placeholder {
+  opacity: 0.5;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: red;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+}
+:focus::-moz-placeholder {
+  opacity: 0.5;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: red;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+}
+
+  </style>
 	</head>
 	<body>
 	<section class="ftco-section">
@@ -27,6 +72,9 @@
 					<div class="login-wrap p-4 p-md-5">
 						<form  id="myform1" action="" method="POST" class="login-form" onsubmit="process(event)" >
                             @csrf
+                            
+                            <!-- <input type="hidden" value="{{2}}" name="office_id"> -->
+                            
 							<div class="form-group">
 								<input    name="name"  id="name_id" class="form-control" type="text"      placeholder="الاسم  " required>
 							</div>

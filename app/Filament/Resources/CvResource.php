@@ -8,6 +8,7 @@ use App\Models\Cv;
 use App\Models\Job;
 use App\Models\Experience;
 use App\Models\Country;
+use App\Models\Education;
 use App\Models\Type_of_estgdam;
 use App\Models\Religion;
 use App\Models\Lang;
@@ -123,20 +124,14 @@ class CvResource extends Resource
                 TextInput::make('code')->translateLabel(),
                 TextInput::make('phone')->translateLabel(),
 
+                Select::make('education_id')
+                ->options(
 
-                Select::make('education')
-                ->options([
-                    'ابتدائي' => 'ابتدائي',
-                    'متوسط' => 'متوسط',
-                    'ثانوي' => 'ثانوي',
-                ])->required()->label("Education")->searchable()->translateLabel(),
+                    Education::where('office_id',$office_id)->pluck('name','id')
+                    
+                )->required()->label("Education")->searchable()->translateLabel(),
 
-
-
-
-
-
-
+                
 
                 TextInput::make('passportNumber')->numeric()->translateLabel(),
                 TextInput::make('salary')->numeric()->translateLabel(),

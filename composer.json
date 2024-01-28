@@ -17,7 +17,8 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "malzariey/filament-daterangepicker-filter": "^2.3",
-        "pxlrbt/filament-excel": "^2.1",
+        "psr/simple-cache": "2.0",
+        "pxlrbt/filament-excel": "^2.3",
         "stijnvanouplines/blade-country-flags": "^1.0"
     },
     "require-dev": {

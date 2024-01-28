@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\Country;
 use App\Models\User;
 use Filament\Forms;
 
@@ -28,10 +29,10 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'Settings';
   
-    // public static   function shouldRegisterNavigation(): bool
-    // {
-    // return auth()->user()->user_type=="admin" or auth()->user()->user_type=="office"?true:false;
-    // }
+    public static   function shouldRegisterNavigation(): bool
+    {
+    return auth()->user()->user_type=="admin"?true:false;
+    }
 
 
     protected static ?string $model = User::class;
@@ -69,7 +70,14 @@ class UserResource extends Resource
                         
                     ])->label("User")->required()->translateLabel(),
 
-                TextInput::make('password')->password()->required()->translateLabel(),
+                    Select::make('country_id')
+                ->options(
+                    Country::where('office_id',$office_id)->pluck('country','id')
+                    
+                )->required()->label("Country")->searchable()->translateLabel(),
+
+
+                TextInput::make('password')->password()->translateLabel(),
             ]);
     }
     

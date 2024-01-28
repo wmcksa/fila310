@@ -11,34 +11,16 @@ class Follow_up extends Model
     protected $table = 'follow_ups';
     protected $guarded = []; 
 
-
-
-
-
-
-    public function User(){
-
+    public function User()
+    {
         return $this->belongsTo(User::class);
-            }
-
-
-
-
-
-            public function Status(){
-
-                return $this->belongsTo(Status::class);
-                    }
-
-
-                    public function owner(){
-
-                        return $this->belongsTo(User::class,'owner_id','id');
-                            }
-
-
-
-
+    }
+    public function Status(){
+        return $this->belongsTo(Status::class);
+    }
+    public function owner(){
+        return $this->belongsTo(User::class,'owner_id','id');
+    }
 }
 
 

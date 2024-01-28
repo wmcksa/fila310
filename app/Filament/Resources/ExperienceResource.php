@@ -29,12 +29,12 @@ class ExperienceResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Settings';
 
-    // public static   function shouldRegisterNavigation(): bool
-    // {
+    public static   function shouldRegisterNavigation(): bool
+    {
 
-    //     return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="admin"?true:false;
 
-    // }
+    }
 
     
     public static function form(Form $form): Form

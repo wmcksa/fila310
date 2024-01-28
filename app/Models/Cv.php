@@ -74,12 +74,24 @@ return $this->belongsTo(Job::class);
                 return $this->belongsTo(Experience::class);
 
                     }
+                    public function education(){
+
+                        return $this->belongsTo(Education::class);
         
+                            }
+                
 
 
 
 
+public function getCvFileAttribute(){
+       if($this->attributes['cv_file'] !=null){
+        return url('storage').'/'.$this->attributes['cv_file'];
+    }else{
 
+
+            }
+    }
 
 
 

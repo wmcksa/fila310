@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
   <head>
   	<title>عالم الدقة</title>
     <meta charset="utf-8">
@@ -31,6 +31,7 @@
 @else
 
 <script type="text/javascript">
+	alert(55);
 	window.location = "{{route('index_ar')}}";//here double curly bracket
 </script>
 

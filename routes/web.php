@@ -56,6 +56,7 @@ Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->grou
     Route::get('/login_ar', 'login_ar')->name('login_ar');
     Route::get('/', 'index')->name('index');
     Route::get('/all-workers', 'all_workers')->name('all_workers');
+    Route::get('/no-file', 'noFile')->name('no_file');
 
 
 

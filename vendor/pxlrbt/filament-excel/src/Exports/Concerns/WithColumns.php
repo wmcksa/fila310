@@ -25,7 +25,7 @@ trait WithColumns
 
     protected ?string $columnsSource = null;
 
-    public function withColumns(Closure|array|string $columns = null): static
+    public function withColumns(Closure|array|string|null $columns = null): static
     {
         if (is_callable($columns)) {
             $this->columns = $columns;
@@ -60,6 +60,8 @@ trait WithColumns
         $this->generatedColumns = fn () => ($this->cachedMap ??= $this->createFieldMappingFromTable())->toArray();
 
         $this->columnsSource = 'table';
+
+        $this->useTableQuery();
 
         return $this;
     }

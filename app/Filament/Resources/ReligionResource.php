@@ -32,7 +32,7 @@ class ReligionResource extends Resource
 
     public static   function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->user_type=="office" or auth()->user()->user_type=="admin"?true:false;
+        return auth()->user()->user_type=="admin"?true:false;
     }
 
 

@@ -19,6 +19,7 @@ use App\Models\UsersReport;
 use App\Models\Baner;
 use App\Models\Setting;
 use Session;
+use Response;
 
 
 
@@ -52,6 +53,24 @@ class FrontendController extends Controller
         
 
     }
+    
+    
+    public function getDownload($id)
+{
+    $cv = Cv::where('id',$id)->first();
+    // dd($cv->cv_file);
+    //PDF file is stored under project/public/download/info.pdf
+    $file= $cv->cv_file;
+
+    $headers = [
+              'Content-Type' => 'application/pdf',
+           ];
+
+        // dd($file);    
+
+    return response()->download($file, 'filename.pdf', $headers);
+}
+
 
 
 
@@ -127,6 +146,8 @@ class FrontendController extends Controller
             return view('frontend.index_ar');
         }
     }
+
+    
 
 
 

@@ -39,20 +39,6 @@ class FollowUpResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-path-rounded-square';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public static function form(Form $form): Form
     {
         if(auth()->user()->user_type == "office" OR auth()->user()->user_type =="employee" )

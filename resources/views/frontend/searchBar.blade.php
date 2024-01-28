@@ -48,7 +48,7 @@
                                             <select    name="kh"  id="name_id" class="form-control" type="text"  placeholder="الخبره">
                                                 <option value="" disabled selected> اختر الخبره</option>
                                                     @foreach ($experiences as $experience)
-                                                    <option value="{{$experience->id}}">{{$experience->name}}</option>
+                                                    <option value="{{$experience->id}}">{{$experience->experience}}</option>
                                                     @endforeach
                                             </select>
                                         </div>
