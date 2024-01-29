@@ -90,9 +90,9 @@
   <body>
     <div class="text-center mb-2 " style =" background: #ffffff!important; color: rgb(255, 255, 255)     ">
         <br>
-         
+        
           <a class="" href="#">
-            <img src="<?php echo e($settings->logo); ?>" alt="" width="120px" height="120px">
+            <img src="<?php if($settings): ?><?php echo e($settings->logo); ?><?php else: ?> url('storage/logo/01HGEJE1EBTJE1GE7BZHQAAGXX.png') <?php endif; ?>" alt="" width="120px" height="120px">
           </a>
     
       <br>
@@ -111,8 +111,8 @@
             <div class="container-fluid">
               <a class="navbar-brand" href="   <?php echo e($settings->site_url??""); ?>">موقعنا الالكتروني </a>
               <a class="navbar-brand" href="https://musaned.com.sa/home">  مساند</a>
-              <a class="navbar-brand" href="https://wa.me/<?php echo e($settings->phone); ?>">    وتساب</a>
-              <a class="navbar-brand" href="tel:+<?php echo e($settings->phone); ?>">  اتصال  </a>
+              <?php if($settings): ?><a class="navbar-brand" href="https://wa.me/<?php echo e($settings->phone); ?>">    وتساب</a><?php endif; ?>
+              <?php if($settings): ?><a class="navbar-brand" href="tel:+<?php echo e($settings->phone); ?>">  اتصال  </a><?php endif; ?>
             </div>
           </nav>
     </div>
@@ -267,9 +267,7 @@
                                     <div class="form-group"    hidden  >
                                         <input name="office_id" id="office_id" type="text" class="form-control"  dir="rtl" required>
                                     </div>
-                                    <div class="form-group"    hidden  >
-                                        <input name="cv_country_id" value="<?php echo e($cv->country_id); ?>"  type="text" class="form-control"  dir="rtl" required>
-                                    </div>
+                                    
                                     <div class="form-group" dir="rtl" style="padding: 3px;" >
                                     <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" الاسم" required>
                                     </div>

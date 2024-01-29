@@ -13,6 +13,7 @@ class Setting extends Model
         'cv_update_time','cv_update_time2','site_name','site_url','phone','logo','website_login_form','office_id','recieve_orders_by_country'];
     
     protected $guarded = []; 
+
     
     
     public function getLogoAttribute(){

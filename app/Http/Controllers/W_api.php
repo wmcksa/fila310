@@ -19,7 +19,7 @@ class W_api extends Controller
               //echo $msg;
          
                 $ch = curl_init();
-                $url = "http://clp.wmc-ksa.com/w_api/index.php?to=".$number."&&body=".$msg."&&token=vidngbtrig1s1qz3&&instance=instance69003";
+                $url = "http://clp.wmc-ksa.com/w_api/index.php?to=".$number."&&body=".$msg."&&token=rzv54gobiaasgqsy&&instance=instance75972";
              
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);

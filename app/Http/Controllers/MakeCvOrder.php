@@ -29,7 +29,6 @@ class MakeCvOrder extends Controller
 
         if($setting->recieve_orders_by_country =="0"){
         
-        
             
                 $last_inserted_cv_order_user_id;
                 $data=$request->all();
@@ -121,7 +120,6 @@ class MakeCvOrder extends Controller
 
 
 
-
                     $last_inserted_cv_order_user_id;
                     $data=$request->all();
     
@@ -129,30 +127,38 @@ class MakeCvOrder extends Controller
     
                     if($data['user_id']=='0'){
                         $cv_orders = Cv_order::where(['employee_selected_by_customer'=>'0','office_id'=>$request->office_id])->orderBy('id', 'ASC')->get();
+                        
                         //return $cv_orders;
                         $users=User::where(['user_type'=>'employee','manager_id'=>$request->office_id,'country_id'=>$cv->country_id])->get();
                         //return $users;
                         $users_array = array();
                         $cv_orders_array = array();
+
+                        if($users){
     
-                        foreach($users as $user){
-                            array_push($users_array, $user->id);
+                            foreach($users as $user){
+                                array_push($users_array, $user->id);
+                            }
                         }
-                        foreach($cv_orders as $cv_order){
-                                        //echo $r->name;
-                                    // echo $user->id."<br>" ;
-                            array_push($cv_orders_array, $cv_order->user_id);
-                                        
+
+
+
+                        if($cv_orders){
+                                foreach($cv_orders as $cv_order){
+                                                //echo $r->name;
+                                            // echo $user->id."<br>" ;
+                                    array_push($cv_orders_array, $cv_order->user_id);
+                                                
+                                }
                         }
     
     
     
                         if(sizeof($cv_orders_array)==0){
+                            
     
                             echo "zero orders";
                             $last_inserted_cv_order_user_id=$users_array[0];
-    
-                        
     
                         }
                         else{

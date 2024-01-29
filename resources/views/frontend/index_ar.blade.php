@@ -90,9 +90,9 @@
   <body>
     <div class="text-center mb-2 " style =" background: #ffffff!important; color: rgb(255, 255, 255)     ">
         <br>
-         
+        
           <a class="" href="#">
-            <img src="{{$settings->logo}}" alt="" width="120px" height="120px">
+            <img src="@if($settings){{$settings->logo}}@else url('storage/logo/01HGEJE1EBTJE1GE7BZHQAAGXX.png') @endif" alt="" width="120px" height="120px">
           </a>
     
       <br>
@@ -110,8 +110,8 @@
             <div class="container-fluid">
               <a class="navbar-brand" href="   {{$settings->site_url??""}}">موقعنا الالكتروني </a>
               <a class="navbar-brand" href="https://musaned.com.sa/home">  مساند</a>
-              <a class="navbar-brand" href="https://wa.me/{{$settings->phone}}">    وتساب</a>
-              <a class="navbar-brand" href="tel:+{{$settings->phone}}">  اتصال  </a>
+              @if($settings)<a class="navbar-brand" href="https://wa.me/{{$settings->phone}}">    وتساب</a>@endif
+              @if($settings)<a class="navbar-brand" href="tel:+{{$settings->phone}}">  اتصال  </a>@endif
             </div>
           </nav>
     </div>
