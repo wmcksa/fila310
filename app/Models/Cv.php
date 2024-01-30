@@ -46,7 +46,8 @@ return $this->belongsTo(Job::class);
 
                         return $this->belongsTo(Religion::class);
                             }
-                
+
+                            
         
 
                          

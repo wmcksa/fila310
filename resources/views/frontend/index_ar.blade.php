@@ -154,9 +154,15 @@
                                     <p class="price"> المهنه :</p><span>{{$cv->job->name}}</span>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-center">
+                                <div class="card-more-info">
+                                    <div class="students">
+                                      <p class="price">رقم السيره الذاتيه :</p><span>{{$cv->id}}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
                                     <p class="price"> الحاله :</p><span>@if($cv->final_status=="reserved") محجوز مؤقتا @elseif($cv->final_status=="") متاح @else متاح  @endif</span>
                                     </div>
+                                </div>
+                                
                                 <div class="text-center pt-2">
                                       <a class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$cv->id}}">مزيد من المعلومات</a>
                                       <a href="{{$cv->cv_file}}" class="btn btn-info p-2" >عرض السيره الذاتيه</a>
@@ -190,6 +196,10 @@
                                                             <td>{{$cv->id}}</td>
                                                             </tr>
                                                             <tr>
+                                                            <th scope="col">الراتب</th>
+                                                            <td>{{$cv->salary}}</td>
+                                                            </tr>
+                                                            <tr>
                                                             <th scope="col">العمر</th>
                                                             <td>{{$cv->age}}</td>
                                                             </tr>
@@ -219,7 +229,7 @@
                                                             </tr>
                                                             <tr>
                                                             <th scope="col">مستوي التعليم</th>
-                                                            <td>{{$cv->name}}</td>
+                                                            <td>{{$cv->education->name??""}}</td>
                                                             </tr>
                                                             <tr>
                                                             <th scope="col">رسوم النقل</th>
@@ -271,7 +281,7 @@
                                     <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" الاسم" required>
                                     </div>
                                     <div class="form-group" style="padding: 3px;">
-                                        <input name="phone" id="model_phone_id" type="number" class="form-control" placeholder="رقم جوالك" dir="rtl" required>
+                                        <input name="phone" id="model_phone_id" type="number" class="form-control" placeholder="رقم جوالك" dir="rtl"  disabled>
                                     </div>
                                     <div class="form-group" style="padding: 3px;">
                                         <select name="branch_id" class="form-control" >

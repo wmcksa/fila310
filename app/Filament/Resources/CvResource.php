@@ -39,6 +39,9 @@ use Filament\Tables\Filters\SelectFilter;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use Filament\Actions\CreateAction;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Actions\ReplicateAction;
 
 class CvResource extends Resource
@@ -136,7 +139,27 @@ class CvResource extends Resource
                 TextInput::make('passportNumber')->numeric()->translateLabel(),
                 TextInput::make('salary')->numeric()->translateLabel(),
                 TextInput::make('transportFees')->numeric()->translateLabel(),
-                
+
+
+                TextInput::make('no_experience_year')->label(" Number Experience Year")->numeric()->translateLabel(),
+                Select::make('has_child')
+                ->options(
+                   [  
+                     "1"=>"Yes",
+                     "0"=>"No",
+                   ]
+                    
+                )->label("Has Child")->searchable(),
+
+                TextInput::make('child_number')->label(" Child Number")->numeric()->translateLabel(),
+                TextInput::make('contract_duration')->label(" Contract Duration")->numeric()->translateLabel(),
+                DatePicker::make('date_of_birth')->label(" Date Of Birth")->translateLabel(),
+                TextInput::make('height')->translateLabel(),
+                TextInput::make('weight')->translateLabel(),
+                TextInput::make('marital_status')->label(" Marital Status")->translateLabel(),
+                MarkdownEditor::make('skills')->translateLabel(),
+
+
                 
 
 

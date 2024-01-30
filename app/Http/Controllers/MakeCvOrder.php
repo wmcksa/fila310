@@ -54,7 +54,6 @@ class MakeCvOrder extends Controller
                     }
 
 
-
                     if(sizeof($cv_orders_array)==0){
 
                         echo "zero orders";
@@ -64,15 +63,15 @@ class MakeCvOrder extends Controller
 
                     }
                     else{
-                    // dd($users_array);
+                    // dd($cv_orders_array);
                         $last_inserted_cv_order_user_id=end($cv_orders_array); 
                         // dd($last_inserted_cv_order_user_id);
 
                         if( $last_inserted_cv_order_user_id==end($users_array)){
-
                             $last_inserted_cv_order_user_id=$users_array[0];
                         }
                         else{
+                            dd(22);
                             $search_index=array_search($last_inserted_cv_order_user_id, $users_array);
                             $last_inserted_cv_order_user_id=$users_array[$search_index+1];
                         }
@@ -83,6 +82,7 @@ class MakeCvOrder extends Controller
 
 
 
+                        // dd($cv_orders_array);
 
 
 
