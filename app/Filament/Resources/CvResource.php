@@ -136,7 +136,7 @@ class CvResource extends Resource
 
                 
 
-                TextInput::make('passportNumber')->numeric()->translateLabel(),
+                TextInput::make('passportNumber')->translateLabel(),
                 TextInput::make('salary')->numeric()->translateLabel(),
                 TextInput::make('transportFees')->numeric()->translateLabel(),
 
