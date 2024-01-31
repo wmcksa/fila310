@@ -36,21 +36,7 @@ class FollowUpsRelationManager extends RelationManager
         return $form
             ->schema([
 
-
-                /*
-                Forms\Components\TextInput::make('id')
-                    ->required()
-                    ->maxLength(255),
-
-*/
-
-
-
                     Hidden::make('user_id')->default(Auth::id()),
-
-                   
-    
-    
     
                     Select::make('status_id')
                     ->options(
@@ -59,23 +45,6 @@ class FollowUpsRelationManager extends RelationManager
                         
                     )->required()->label("CV Status"),
     
-    
-    /*
-                    Select::make('owner_id')
-                    ->options(
-    
-                        User::all()->pluck('name','id')
-                        
-                    )->required()->label("Responsible Name Name"),
-
-
-*/
-
-
-
-
-
-
                      
             ]);
     }
@@ -85,14 +54,6 @@ class FollowUpsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('id')
             ->columns([
-
-
-
-               
-
-
-
-
 
 
                 TextColumn::make('id'),

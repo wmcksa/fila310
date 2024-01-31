@@ -232,7 +232,7 @@ class FrontendController extends Controller
             }
 
             else{
-                $status=Status::where(['id'=>$cv_fp->status_id,'office_id'=>$user->id])->first();
+                $status=Status::where('id',$cv_fp->status_id)->first();
                 return   $status->name;
             }
        

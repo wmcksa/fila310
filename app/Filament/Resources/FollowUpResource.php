@@ -75,7 +75,7 @@ class FollowUpResource extends Resource
                 Select::make('status_id')
                 ->options(
 
-                    Status::where('office_id',$office_id)->pluck('name','id')
+                    Status::pluck('name','id')
                     
                 )->required()->label("CV Status")->translateLabel(),
 

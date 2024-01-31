@@ -160,7 +160,7 @@
                                       <p class="price">رقم السيره الذاتيه :</p><span><?php echo e($cv->id); ?></span>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                    <p class="price"> الحاله :</p><span><?php if($cv->final_status=="reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status==""): ?> متاح <?php else: ?> متاح  <?php endif; ?></span>
+                                    <p class="price"> الحاله :</p><span><?php if($cv->final_status=="Reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status=="Available"): ?> متاح <?php elseif($cv->final_status=="Back"): ?> متاح  <?php else: ?> غير متاح <?php endif; ?></span>
                                     </div>
                                 </div>
                                 
@@ -238,7 +238,7 @@
                                                             </tr>
                                                             <tr>
                                                             <th scope="col">الحاله</th>
-                                                            <td><?php if($cv->final_status=="reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status==""): ?> متاح <?php else: ?> متاح  <?php endif; ?></td>
+                                                            <td><?php if($cv->final_status=="Reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status=="Available"): ?> متاح <?php elseif($cv->final_status=="Back"): ?> متاح  <?php else: ?> غير متاح <?php endif; ?></td>
                                                             </tr>
                                                             
                                                         </tbody>
@@ -434,6 +434,12 @@
 
                 document.getElementById('model_phone_id').setAttribute('value',localStorage.getItem("phone"));
                 // $("#model_phone_id").prop('disabled', true);
+
+
+
+
+
+                
 
 
 
