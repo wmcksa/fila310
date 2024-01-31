@@ -19,7 +19,7 @@ class MakeCvOrder extends Controller
     public function make_cv_order(Request $request)
     {
 
-        
+        // dd($request->all());
 
         $cv = Cv::where('id',$request->cv_id)->first();
 

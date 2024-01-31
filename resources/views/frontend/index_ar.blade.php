@@ -282,11 +282,11 @@
                                         <input name="office_id" id="office_id" type="text" class="form-control"  dir="rtl" required>
                                     </div>
                                     
-                                    <div class="form-group" dir="rtl" style="padding: 3px;" >
+                                    <div class="form-group" dir="rtl" style="padding: 3px;">
                                     <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" الاسم" required>
                                     </div>
                                     <div class="form-group" style="padding: 3px;">
-                                        <input name="phone" id="model_phone_id" type="number" class="form-control" readonly="readonly" placeholder="رقم جوالك" dir="rtl">
+                                        <input name="phone" id="model_phone_id" type="number" class="form-control" @if($settings->is_otp_enable == "1") readonly="readonly" @endif  placeholder="رقم جوالك" dir="rtl">
                                     </div>
                                     
                                     <div class="form-group" style="padding: 3px;">
@@ -453,15 +453,25 @@ if(otp_status =="1"){
                 document.getElementById('model_phone_id').setAttribute('value',localStorage.getItem("phone"));
                 // $("#model_phone_id").prop('disabled', true);
 
-
-
-
-
-                
-
-
-
         })
+      }else{
+
+        $('.otp').on('show.bs.modal', function (event) {
+
+          var button = $(event.relatedTarget) // Button that triggered the modal
+                var recipient = button.data('cv_id') // Extract info from data-* attributes
+                var office_id = button.data('office_id') // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                
+              //alert(recipient)
+                
+                var modal = $(this)
+                //modal.find('.modal-title').text('New message to ' + recipient)
+                modal.find('.modal-body #cv_id').val(recipient)
+                modal.find('.modal-body #office_id').val(office_id)
+
+        });
 
       }
   </script>
