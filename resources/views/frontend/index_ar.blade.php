@@ -283,6 +283,7 @@
                                     <div class="form-group" style="padding: 3px;">
                                         <input name="phone" id="model_phone_id" type="number" class="form-control" readonly="readonly" placeholder="رقم جوالك" dir="rtl">
                                     </div>
+                                    
                                     <div class="form-group" style="padding: 3px;">
                                         <select name="branch_id" class="form-control" >
                                             <option value="0">اختر الفرع (اختياري)</option>
@@ -293,14 +294,20 @@
                                     @endforeach
                                 </select>
                                 </div>
-                                <div class="form-group" style="padding: 3px;">
-                                    <select name="user_id" class="form-control" >
-                                        <option value="0">اختر الموضف (اختياري)</option>
-                                @foreach ($emps as $emp)
-                                <option value="{{$emp->id}}">{{$emp->name}}</option>
-                                @endforeach
-                            </select>
-                            </div>
+
+                                
+                                @if(recieve_orders_by_country =="0")
+                                    <div class="form-group" style="padding: 3px;">
+                                        <select name="user_id" class="form-control" >
+                                          <option value="0">اختر الموضف (اختياري)</option>
+                                          @foreach ($emps as $emp)
+                                          <option value="{{$emp->id}}">{{$emp->name}}</option>
+                                          @endforeach
+                                      </select>
+                                </div>
+                            @else
+                                 <input hidden name="user_id" value="0">
+                                @endif
                             <div class="form-group" style="padding: 3px;">
                                 <select name="have_visa" class="form-control" >
                                     <option value="0">ليس لدي تاشيرة</option>
