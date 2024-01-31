@@ -69,6 +69,7 @@ class CvOrderResource extends Resource
 
     
                 TextColumn::make('cv.name')->label('Cv Name')->searchable()->translateLabel() ,
+                TextColumn::make('cv.id')->label('Cv ID')->searchable()->translateLabel() ,
                 
 
                  

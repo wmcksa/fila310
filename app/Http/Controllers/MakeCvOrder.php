@@ -27,7 +27,8 @@ class MakeCvOrder extends Controller
         // dd($setting);
 
         if($setting->recieve_orders_by_country =="0"){
-        
+            
+
             
                 $last_inserted_cv_order_user_id;
                 $data=$request->all();
@@ -116,6 +117,7 @@ class MakeCvOrder extends Controller
                     }
 
                 }else{
+                    
 
 
 
@@ -125,8 +127,9 @@ class MakeCvOrder extends Controller
     
     
                     if($data['user_id']=='0'){
-                        $cv_orders = Cv_order::where(['employee_selected_by_customer'=>'0','office_id'=>$request->office_id])->orderBy('id', 'ASC')->get();
-                        
+                        $cv_orders = Cv_order::where(['employee_selected_by_customer'=>'0','office_id'=>$request->office_id,'country_id'=>$cv->country_id])->orderBy('id', 'ASC')->get();
+                                                // dd($cv_orders);
+
                         //return $cv_orders;
                         $users=User::where(['user_type'=>'employee','manager_id'=>$request->office_id,'country_id'=>$cv->country_id])->get();
                         //return $users;
@@ -139,7 +142,6 @@ class MakeCvOrder extends Controller
                                 array_push($users_array, $user->id);
                             }
                         }
-
 
 
                         if($cv_orders){
@@ -161,11 +163,11 @@ class MakeCvOrder extends Controller
     
                         }
                         else{
-                        // dd($users_array);
                             $last_inserted_cv_order_user_id=end($cv_orders_array); 
                             // dd($last_inserted_cv_order_user_id);
     
                             if( $last_inserted_cv_order_user_id==end($users_array)){
+                                // dd(11);
     
                                 $last_inserted_cv_order_user_id=$users_array[0];
                             }
@@ -185,6 +187,7 @@ class MakeCvOrder extends Controller
     
     
                         $data['user_id']= $last_inserted_cv_order_user_id;
+                        $data['country_id']= $cv->country_id;
                         echo $data['user_id'];
     
                         Cv_order::create($data);

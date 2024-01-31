@@ -134,7 +134,7 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="card card-1 shadow">
                             <div class="image-cover sameHeight">
-                                <div class="card-badge-1">{{$cv->age}}<span>سنه</span></div>
+                                <div class="card-badge-1"  style="background-color: #0b5ed7;">{{$cv->age}}<span>سنه</span></div>
                                 <img src="{{asset("storage/$cv->cv_pic")}}">
                             </div>
                             <div class="card-body">
@@ -164,9 +164,9 @@
                                 </div>
                                 
                                 <div class="text-center pt-2">
-                                      <a class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$cv->id}}">مزيد من المعلومات</a>
-                                      <a href="{{$cv->cv_file}}" class="btn btn-info p-2" >عرض السيره الذاتيه</a>
-                                      <a href="#{{$user->id}}" data-bs-toggle="modal"  data-cv_id="{{$cv->id}}" data-office_id="{{$user->id}}" class="btn  p-2" style="background-color: #8d448b;color:#fff;margin:3px;">طلب التواصل</a>
+                                      <a class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$cv->id}}" style="width:100%;margin-top:3px;font-weight: bold;">مزيد من المعلومات</a><br>
+                                      <a href="{{$cv->cv_file}}" class="btn btn-primary p-2" style="width:100%;margin-top:3px;font-weight: bold;" >عرض السيره الذاتيه</a><br>
+                                      <a class="btn btn-primary p-2" href="#{{$user->id}}" data-bs-toggle="modal"  data-cv_id="{{$cv->id}}" data-office_id="{{$user->id}}" class="btn  p-2" style="margin:3px;width:100%;margin-top:3px;font-weight: bold;">طلب التواصل</a>
                                 </div>
                             </div>
                         </div>
@@ -192,8 +192,13 @@
                                                             <th scope="col">الاسم</th>
                                                             <td>{{$cv->name}}</td>
                                                             </tr>
+                                                            <tr>
                                                             <th scope="col">رقم السيره الذاتيه</th>
                                                             <td>{{$cv->id}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <th scope="col">الكود</th>
+                                                            <td>{{$cv->code??""}}</td>
                                                             </tr>
                                                             <tr>
                                                             <th scope="col">الراتب</th>

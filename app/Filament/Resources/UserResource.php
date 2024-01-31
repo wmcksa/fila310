@@ -96,6 +96,7 @@ class UserResource extends Resource
               TextColumn::make('name')->translateLabel(),
               TextColumn::make('email')->translateLabel(),
               TextColumn::make('phone')->translateLabel(),
+              TextColumn::make('country.country')->translateLabel(),
               TextColumn::make('user_type')->label("User")->translateLabel(),
               TextColumn::make('created_at')->translateLabel(),
             ])
