@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Filament\Pages\Services;
+use Illuminate\Filesystem\Filesystem;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,7 @@ Route::get('/', function () {
 
 
 Route::get('/linkstorage', function () {
+    File::deleteDirectory(public_path('storage'));
     Artisan::call('storage:link');
 });
 
