@@ -346,6 +346,9 @@
 @endif
 @endisset
 
+
+<input value="{{$settings->is_otp_enable}}" id="is_otp_enable" hidden>
+
 <!--footer-start-->
 <footer>
       <div class="rights">
@@ -411,10 +414,14 @@
      
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script type="text/javascript">
+
+     var otp_status = $('#is_otp_enable').val();
     
       //  alert("wwe");
         //return true; // prevents browser error messages  
         //  localStorage.setItem("verified", "0");
+if(otp_status =="1"){
+
         $('.otp').on('show.bs.modal', function (event) {
                 if(localStorage.getItem("verified")=="1"){
                   //$('#exampleModal').modal('toggle');
@@ -455,6 +462,8 @@
 
 
         })
+
+      }
   </script>
 
 

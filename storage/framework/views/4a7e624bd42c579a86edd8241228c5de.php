@@ -135,7 +135,7 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="card card-1 shadow">
                             <div class="image-cover sameHeight">
-                                <div class="card-badge-1"><?php echo e($cv->age); ?><span>سنه</span></div>
+                                <div class="card-badge-1"  style="background-color: #0b5ed7;"><?php echo e($cv->age); ?><span>سنه</span></div>
                                 <img src="<?php echo e(asset("storage/$cv->cv_pic")); ?>">
                             </div>
                             <div class="card-body">
@@ -165,9 +165,9 @@
                                 </div>
                                 
                                 <div class="text-center pt-2">
-                                      <a class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?php echo e($cv->id); ?>">مزيد من المعلومات</a>
-                                      <a href="<?php echo e($cv->cv_file); ?>" class="btn btn-info p-2" >عرض السيره الذاتيه</a>
-                                      <a href="#<?php echo e($user->id); ?>" data-bs-toggle="modal"  data-cv_id="<?php echo e($cv->id); ?>" data-office_id="<?php echo e($user->id); ?>" class="btn  p-2" style="background-color: #8d448b;color:#fff;margin:3px;">طلب التواصل</a>
+                                      <a class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?php echo e($cv->id); ?>" style="width:100%;margin-top:3px;font-weight: bold;">مزيد من المعلومات</a><br>
+                                      <a href="<?php echo e($cv->cv_file); ?>" class="btn btn-primary p-2" style="width:100%;margin-top:3px;font-weight: bold;" >عرض السيره الذاتيه</a><br>
+                                      <a class="btn btn-primary p-2" href="#<?php echo e($user->id); ?>" data-bs-toggle="modal"  data-cv_id="<?php echo e($cv->id); ?>" data-office_id="<?php echo e($user->id); ?>" class="btn  p-2" style="margin:3px;width:100%;margin-top:3px;font-weight: bold;">طلب التواصل</a>
                                 </div>
                             </div>
                         </div>
@@ -193,8 +193,13 @@
                                                             <th scope="col">الاسم</th>
                                                             <td><?php echo e($cv->name); ?></td>
                                                             </tr>
+                                                            <tr>
                                                             <th scope="col">رقم السيره الذاتيه</th>
                                                             <td><?php echo e($cv->id); ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                            <th scope="col">الكود</th>
+                                                            <td><?php echo e($cv->code??""); ?></td>
                                                             </tr>
                                                             <tr>
                                                             <th scope="col">الراتب</th>
@@ -284,6 +289,7 @@
                                     <div class="form-group" style="padding: 3px;">
                                         <input name="phone" id="model_phone_id" type="number" class="form-control" readonly="readonly" placeholder="رقم جوالك" dir="rtl">
                                     </div>
+                                    
                                     <div class="form-group" style="padding: 3px;">
                                         <select name="branch_id" class="form-control" >
                                             <option value="0">اختر الفرع (اختياري)</option>
@@ -294,14 +300,20 @@
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                                 </div>
-                                <div class="form-group" style="padding: 3px;">
-                                    <select name="user_id" class="form-control" >
-                                        <option value="0">اختر الموضف (اختياري)</option>
-                                <?php $__currentLoopData = $emps; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($emp->id); ?>"><?php echo e($emp->name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            </div>
+
+                                
+                                <?php if($settings->recieve_orders_by_country =="0"): ?>
+                                    <div class="form-group" style="padding: 3px;">
+                                        <select name="user_id" class="form-control" >
+                                          <option value="0">اختر الموضف (اختياري)</option>
+                                          <?php $__currentLoopData = $emps; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                          <option value="<?php echo e($emp->id); ?>"><?php echo e($emp->name); ?></option>
+                                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                      </select>
+                                </div>
+                            <?php else: ?>
+                                 <input hidden name="user_id" value="0">
+                                <?php endif; ?>
                             <div class="form-group" style="padding: 3px;">
                                 <select name="have_visa" class="form-control" >
                                     <option value="0">ليس لدي تاشيرة</option>
@@ -334,6 +346,9 @@
 <p class="alert text-center <?php echo e(Session::get('alert-class', 'alert-info')); ?>"><?php echo e(Session::get('message')); ?></p>
 <?php endif; ?>
 <?php endif; ?>
+
+
+<input value="<?php echo e($settings->is_otp_enable); ?>" id="is_otp_enable" hidden>
 
 <!--footer-start-->
 <footer>
@@ -400,10 +415,14 @@
      
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
     <script type="text/javascript">
+
+     var otp_status = $('#is_otp_enable').val();
     
       //  alert("wwe");
         //return true; // prevents browser error messages  
         //  localStorage.setItem("verified", "0");
+if(otp_status =="1"){
+
         $('.otp').on('show.bs.modal', function (event) {
                 if(localStorage.getItem("verified")=="1"){
                   //$('#exampleModal').modal('toggle');
@@ -444,6 +463,8 @@
 
 
         })
+
+      }
   </script>
 
 
