@@ -77,7 +77,7 @@ class UserResource extends Resource
                 )->label("Country")->searchable()->translateLabel(),
 
 
-                TextInput::make('password')->password()->translateLabel(),
+                TextInput::make('password')->password()->unique(ignoreRecord:true)->translateLabel(),
             ]);
     }
     
