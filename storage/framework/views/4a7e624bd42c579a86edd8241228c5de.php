@@ -226,7 +226,7 @@
                                                             </tr>
                                                             <tr>
                                                             <th scope="col">نوع الاستقدام</th>
-                                                            <td><?php echo e($cv->name); ?></td>
+                                                            <td><?php echo e($cv->Type_of_estgdam->name); ?></td>
                                                             </tr>
                                                             <tr>
                                                             <th scope="col">مستوي التعليم</th>
@@ -282,7 +282,7 @@
                                     <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" الاسم" required>
                                     </div>
                                     <div class="form-group" style="padding: 3px;">
-                                        <input name="phone" id="model_phone_id" type="number" class="form-control" placeholder="رقم جوالك" dir="rtl"  disabled>
+                                        <input name="phone" id="model_phone_id" type="number" class="form-control" readonly="readonly" placeholder="رقم جوالك" dir="rtl">
                                     </div>
                                     <div class="form-group" style="padding: 3px;">
                                         <select name="branch_id" class="form-control" >
@@ -303,7 +303,7 @@
                             </select>
                             </div>
                             <div class="form-group" style="padding: 3px;">
-                                <select name="user_id" class="form-control" >
+                                <select name="have_visa" class="form-control" >
                                     <option value="0">ليس لدي تاشيرة</option>
                                     <option value="1">لدي تأشيرة</option>
                                 </select>
@@ -351,28 +351,41 @@
                 <p> استقدم- جميع الحقوق محفوظه</p>
               </div>
             </div>
-            <div
-              class="col-md-6 d-flex align-items-center justify-content-md-end justify-content-center"
-            >
-              <!-- <p>SAUDI MENU- All Rights Reserved</p> -->
-              <ul class="social-links">
-                  <li class="facebook">
-                    <a href="https://www.facebook.com/wmcksa" target="_blank">
-                      <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                  </li>
-                  <li class="twitter">
-                    <a href="https://twitter.com/WMC_ksa" target="_blank">
-                      <i class="fa-brands fa-twitter"></i>
-                    </a>
-                  </li>
-                  <li class="instagram">
-                    <a href="https://www.instagram.com/wmc_ksa" target="_blank">
-                      <i class="fa-brands fa-instagram"></i>
-                    </a>
-                  </li>
-                </ul>
-            </div>
+            <!-- Grid column -->
+          <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+            <!-- Facebook -->
+            <a
+               class="btn btn-outline-light btn-floating m-1"
+               class="text-white"
+               role="button"
+               ><i class="fab fa-facebook-f"></i
+              ></a>
+
+            <!-- Twitter -->
+            <a
+               class="btn btn-outline-light btn-floating m-1"
+               class="text-white"
+               role="button"
+               ><i class="fab fa-twitter"></i
+              ></a>
+
+            <!-- Google -->
+            <a
+               class="btn btn-outline-light btn-floating m-1"
+               class="text-white"
+               role="button"
+               ><i class="fab fa-google"></i
+              ></a>
+
+            <!-- Instagram -->
+            <a
+               class="btn btn-outline-light btn-floating m-1"
+               class="text-white"
+               role="button"
+               ><i class="fab fa-instagram"></i
+              ></a>
+          </div>
+          <!-- Grid column -->
           </div>
         </div>
       </div>
@@ -418,6 +431,12 @@
                 modal.find('.modal-body #cv_id').val(recipient)
                 modal.find('.modal-body #office_id').val(office_id)
                 modal.find('.modal-body #model_phone_id').val(localStorage.getItem("phone"))
+
+                document.getElementById('model_phone_id').setAttribute('value',localStorage.getItem("phone"));
+                // $("#model_phone_id").prop('disabled', true);
+
+
+
         })
   </script>
 

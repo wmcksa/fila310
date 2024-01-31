@@ -12,7 +12,7 @@
                                 <div class="row mb-4">
                                     <div class="col">
                                         <div data-mdb-input-init class="form-outline">
-                                            <select    name="country_id"  id="name_id" class="form-control" type="text"      placeholder="الدول  " required>
+                                            <select    name="country_id"  id="name_id" class="form-control" type="text"      placeholder="الدول  ">
                                                 <option value="" disabled selected> اختر الدوله</option>
                                                     @foreach ($countries as $country)
                                                     <option value="{{$country->id}}">{{$country->country}}</option>

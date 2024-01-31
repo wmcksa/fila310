@@ -21,7 +21,6 @@ class MakeCvOrder extends Controller
 
         
 
-        // dd($request->all());
         $cv = Cv::where('id',$request->cv_id)->first();
 
         $setting = Setting::where('office_id',$request->office_id)->first();
@@ -71,7 +70,7 @@ class MakeCvOrder extends Controller
                             $last_inserted_cv_order_user_id=$users_array[0];
                         }
                         else{
-                            dd(22);
+                            // dd($users_array);
                             $search_index=array_search($last_inserted_cv_order_user_id, $users_array);
                             $last_inserted_cv_order_user_id=$users_array[$search_index+1];
                         }

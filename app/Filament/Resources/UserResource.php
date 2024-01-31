@@ -74,7 +74,7 @@ class UserResource extends Resource
                 ->options(
                     Country::where('office_id',$office_id)->pluck('country','id')
                     
-                )->required()->label("Country")->searchable()->translateLabel(),
+                )->label("Country")->searchable()->translateLabel(),
 
 
                 TextInput::make('password')->password()->translateLabel(),

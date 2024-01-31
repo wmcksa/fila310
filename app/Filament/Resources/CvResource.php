@@ -141,22 +141,22 @@ class CvResource extends Resource
                 TextInput::make('transportFees')->numeric()->translateLabel(),
 
 
-                TextInput::make('no_experience_year')->label(" Number Experience Year")->numeric()->translateLabel(),
+                TextInput::make('no_experience_year')->label("Number Experience Year")->numeric()->translateLabel(),
                 Select::make('has_child')
                 ->options(
                    [  
-                     "1"=>"Yes",
-                     "0"=>"No",
+                     "1"=>"نعم",
+                     "0"=>"لا",
                    ]
                     
-                )->label("Has Child")->searchable(),
+                )->label("Has Child")->translateLabel()->searchable(),
 
-                TextInput::make('child_number')->label(" Child Number")->numeric()->translateLabel(),
-                TextInput::make('contract_duration')->label(" Contract Duration")->numeric()->translateLabel(),
-                DatePicker::make('date_of_birth')->label(" Date Of Birth")->translateLabel(),
+                TextInput::make('child_number')->label("Child Number")->numeric()->translateLabel(),
+                TextInput::make('contract_duration')->label("Contract Duration")->numeric()->translateLabel(),
+                DatePicker::make('date_of_birth')->label("Date Of Birth")->translateLabel(),
                 TextInput::make('height')->translateLabel(),
                 TextInput::make('weight')->translateLabel(),
-                TextInput::make('marital_status')->label(" Marital Status")->translateLabel(),
+                TextInput::make('marital_status')->label("Marital Status")->translateLabel(),
                 MarkdownEditor::make('skills')->translateLabel(),
 
 

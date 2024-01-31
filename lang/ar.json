@@ -18,7 +18,7 @@
    "project_name":" نظام مستعد    " ,
    "nav_cvs_report":" تقارير السير الذاتية      " ,
    "nav_users_report":" تقارير المستخدمين      " ,
-   "nav_website_users":"  مستخدمين الموقع        " ,
+   "nav_website_users":"العملاء" ,
    "Cv_orders_nav":"طلبات السير الذاتية" ,
    "nav_baners":" بنرات الموقع   " ,
    "Statuses_nav":"حالات السير الذاتية " ,
@@ -30,7 +30,7 @@
    "Type of estgdam":"نوع الاستقدام" ,
    "Experience":"الخبره" ,
    "Religion":"الديانه" ,
-   "Lang":"اللغه" ,
+   "lang":"اللغه" ,
    "country":"الدوله" ,
    "Type":"نوع الاستقدام" ,
    "Experience location":"موقع التجربه" ,
@@ -56,7 +56,16 @@
    "language":"اللغة",
    "Responsible Name":"اسم المسؤول",
    "Email":"البريد الالكتروني",
-   "followups_report":"تقرير المتابعات " 
+   "followups_report":"تقرير المتابعات " ,
+   "Number Experience Year":"عدد سنوات الخبره" ,
+   "Has Child":"لديه أطفال؟" ,
+   "Child Number":"عدد الاطفال" ,
+   "Contract Duration":"مده العقد" ,
+   "Date Of Birth":"تاريخ الميلاد" ,
+   "Height":"الطول" ,
+   "Weight":"الوزن" ,
+   "Marital Status":"الحاله الاجتماعيه" ,
+   "Skills":"المهارات" 
 
 
 
