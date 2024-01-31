@@ -59,7 +59,7 @@ return $this->belongsTo(Job::class);
 
     public function follow_ups(){
 
-        return $this->hasMany(Follow_up::class);
+        return $this->hasMany(Follow_up::class,'cv_id','id');
             }
 
 

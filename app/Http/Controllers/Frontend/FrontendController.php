@@ -132,6 +132,7 @@ class FrontendController extends Controller
         $settings = Setting::where('office_id',$user->id)->first();
 
         $emps = User::where(['user_type'=>'employee','manager_id'=>$id])->get();
+        
 
         foreach ($cvs as $cv) {
             $cv['final_status']= $this->get_cv_state($cv->id,$user);

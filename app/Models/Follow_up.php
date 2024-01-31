@@ -21,6 +21,10 @@ class Follow_up extends Model
     public function owner(){
         return $this->belongsTo(User::class,'owner_id','id');
     }
+
+    public function cv(){
+        return $this->belongsTo(User::class,'cv_id','id');
+    }
 }
 
 
