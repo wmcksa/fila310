@@ -336,7 +336,7 @@ public static function getEloquentQuery(): Builder
         {
             if(auth()->user()->user_type =="office" OR auth()->user()->user_type =="employee"){
                 $user=User::where('id',auth()->user()->id)->first();
-                return static::getModel()::query()->where('office_id',$user->manager_id );
+                return static::getModel()::query()->where('office_id',$user->manager_id )->where('user_id',auth()->user()->id);
             }
             else{
                 return static::getModel()::query()->where('office_id', auth()->user()->id);
