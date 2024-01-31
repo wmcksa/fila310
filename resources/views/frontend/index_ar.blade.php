@@ -296,7 +296,7 @@
                                 </div>
 
                                 
-                                @if(recieve_orders_by_country =="0")
+                                @if($settings->recieve_orders_by_country =="0")
                                     <div class="form-group" style="padding: 3px;">
                                         <select name="user_id" class="form-control" >
                                           <option value="0">اختر الموضف (اختياري)</option>
