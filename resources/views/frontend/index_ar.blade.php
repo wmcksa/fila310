@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/owl.theme.default.css')}}">
 
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
@@ -39,6 +39,27 @@
         font-size: 1.1em;
         padding: 0.5em 1em;
       }
+
+      .float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+  font-size:30px;
+	box-shadow: 2px 2px 3px #999;
+  z-index:100;
+}
+
+.my-float{
+	margin-top:16px;
+}
+
+
       @media screen and (min-width: 768px) {
         .navbar-brand img {
           width: 100px;
@@ -110,8 +131,9 @@
             <div class="container-fluid">
               <a class="navbar-brand" href="   {{$settings->site_url??""}}">موقعنا الالكتروني </a>
               <a class="navbar-brand" href="https://musaned.com.sa/home">  مساند</a>
+<!--               
               @if($settings)<a class="navbar-brand" href="https://wa.me/{{$settings->phone}}">    وتساب</a>@endif
-              @if($settings)<a class="navbar-brand" href="tel:+{{$settings->phone}}">  اتصال  </a>@endif
+              @if($settings)<a class="navbar-brand" href="tel:+{{$settings->phone}}">  اتصال  </a>@endif -->
             </div>
           </nav>
     </div>
@@ -348,6 +370,12 @@
 <p class="alert text-center {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
 @endif
 @endisset
+
+
+<a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
+<i class="fa fa-whatsapp my-float"></i>
+</a>
+
 
 
 
