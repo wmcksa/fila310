@@ -74,45 +74,42 @@ class EditSettings extends Page implements HasForms
 
                     TextInput::make('site_name')
                      ->required(),
-                     TextInput::make('site_url')
-                     ->required(),
+                     TextInput::make('site_url'),
 
 
-                    TextInput::make('phone')
-                    ->numeric()->required(),
-
-
-                  
-
-
- 
-                    FileUpload::make('logo')->disk('public')->directory('logo'),
-
-
-              
-
-
+                 TextInput::make('phone')
+                ->numeric()->required()->translateLabel(),
+                FileUpload::make('logo')->disk('public')->directory('logo'),
                 Select::make('website_login_form')
                 ->options(
 
-                   [   "1"=>"Enabled",
-                       "0"=>"Disabled",
-                   
-                   
+                   [  
+                     "1"=>"مفعل",
+                       "0"=>"غير مفعل",
                    ]
                     
-                )->required()->label("website login form")->searchable(),
+                )->label("website login form")->translateLabel()->searchable(),
 
                 Select::make('recieve_orders_by_country')
                 ->options(
-
-                   [   "1"=>"Enabled",
-                       "0"=>"Disabled",
-                   
-                   
+                   [  
+                     "1"=>"مفعل",
+                     "0"=>"غير مفعل",
                    ]
                     
-                )->required()->label("recieve orders by country")->searchable(),
+                )->label("recieve orders by country")->translateLabel()->searchable(),
+
+                Select::make('is_otp_enable')
+                ->options(
+                   [  
+                     "1"=>"مفعل",
+                     "0"=>"غير مفعل",
+                   ]
+                    
+                )->label("Is Otp Enable")->translateLabel()->searchable(),
+
+                TextInput::make('instance'),
+                TextInput::make('token'),
 
             ])
             ->statePath('data');

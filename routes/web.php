@@ -58,7 +58,6 @@ Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->grou
     Route::get('/login_ar', 'login_ar')->name('login_ar');
     Route::get('/', 'index')->name('index');
     Route::get('/all-workers', 'all_workers')->name('all_workers');
-    Route::get('/no-file', 'noFile')->name('no_file');
 
 
 
@@ -101,7 +100,7 @@ Route::controller(App\Http\Controllers\Otp::class)->group(function () {
    
     Route::get('/otp/{id}','index_ar')->name('otp_ar');
     Route::get('/test_api','test_api');
-    Route::post('/otp_get_code','get_code');
+    Route::post('/otp/get_code','get_code');
     Route::get('/otp_test_get_code','get_code');
 
 });

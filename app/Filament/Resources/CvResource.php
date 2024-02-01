@@ -174,6 +174,9 @@ class CvResource extends Resource
                 FileUpload::make('passportImage')->disk('public')->directory('cv_pic') ->imageEditor()->translateLabel(),
                 FileUpload::make('cv_pic')->disk('public')->directory('cv_pic') ->imageEditor()->translateLabel(),
                 FileUpload::make('cv_file')->disk('public')->directory('cv_file')->translateLabel(),
+
+
+                TextInput::make('cv_back_time')->label("Cv Back Time")->numeric()->translateLabel(),
               
             ]);
     }

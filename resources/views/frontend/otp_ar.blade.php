@@ -161,7 +161,7 @@ var $international_phone_number;
 		$('#myform1').submit(function(e){
 			e.preventDefault();
 			var form = $(this);
-			var actionUrl = "{{url('/otp_get_code')}}";
+			var actionUrl = "{{url('/otp/get_code')}}";
 			
 			$.ajax({
 				type: "POST",

@@ -64,9 +64,14 @@
    "Date Of Birth":"تاريخ الميلاد" ,
    "Height":"الطول" ,
    "Weight":"الوزن" ,
+   "Cv Back Time":"زمن عوده السيره الذاتيه" ,
    "Marital Status":"الحاله الاجتماعيه" ,
    "Skills":"المهارات" ,
-   "Cv ID":"رقم السيره الذاتيه" 
+   "website login form":"فورم دخول الموقع" ,
+   "recieve orders by country":"استقبال الطلبات عن طريق الدوله" ,
+   "site_name":"اسم الموقع" ,
+   "Cv ID":"رقم السيره الذاتيه" ,
+   "Is Otp Enable":"تمكين خاصيه ال Otp" 
    
 
 

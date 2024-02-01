@@ -125,6 +125,9 @@
     <div class="mt-1 mb-1">
         <?php echo $__env->make('frontend.searchBar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
+
+
+    <input value="<?php echo e($settings->is_otp_enable); ?>" id="is_otp_enable" hidden>
   
 
     <div class="mt-1 mb-1">
@@ -160,7 +163,7 @@
                                       <p class="price">رقم السيره الذاتيه :</p><span><?php echo e($cv->id); ?></span>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                    <p class="price"> الحاله :</p><span><?php if($cv->final_status=="Reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status=="Available"): ?> متاح <?php elseif($cv->final_status=="Back"): ?> متاح  <?php else: ?> غير متاح <?php endif; ?></span>
+                                    <p class="price"> الحاله :</p><span><?php if($cv->final_status=="Reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status=="Available"): ?> متاح <?php elseif($cv->final_status=="Back"): ?> متاح  <?php elseif($cv->final_status==""): ?> متاح  <?php else: ?> غير متاح <?php endif; ?></span>
                                     </div>
                                 </div>
                                 
@@ -243,7 +246,7 @@
                                                             </tr>
                                                             <tr>
                                                             <th scope="col">الحاله</th>
-                                                            <td><?php if($cv->final_status=="Reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status=="Available"): ?> متاح <?php elseif($cv->final_status=="Back"): ?> متاح  <?php else: ?> غير متاح <?php endif; ?></td>
+                                                            <td><?php if($cv->final_status=="Reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status=="Available"): ?> متاح <?php elseif($cv->final_status=="Back"): ?> متاح  <?php elseif($cv->final_status==""): ?> متاح  <?php else: ?> غير متاح <?php endif; ?></td>
                                                             </tr>
                                                             
                                                         </tbody>
@@ -348,7 +351,10 @@
 <?php endif; ?>
 
 
-<input value="<?php echo e($settings->is_otp_enable); ?>" id="is_otp_enable" hidden>
+
+
+
+
 
 <!--footer-start-->
 <footer>

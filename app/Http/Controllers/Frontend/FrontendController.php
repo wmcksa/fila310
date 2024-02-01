@@ -20,6 +20,8 @@ use App\Models\Baner;
 use App\Models\Setting;
 use Session;
 use Response;
+use Carbon\Carbon;
+
 
 
 
@@ -103,8 +105,36 @@ class FrontendController extends Controller
         return view('frontend.login_ar',compact('settings'));
     }
 
+    public function updateCvState(){
+        try {
+        $cvs = Cv::all();
+        foreach($cvs as $cv){
+            $follow_up =$cv->follow_ups()->orderBy('id', 'DESC')->first();
+            if($follow_up){
+            if($follow_up->status_id == "1"){
+                // dd(Carbon::now()->addHours(24)->toDateTimeString());
+                $is =$follow_up->where('created_at','<=', Carbon::now()->addHours($cv->cv_back_time)->toDateTimeString())->first();
+                if($is){
+                        $follow_up->update([
+                            'status_id' => '5'
+                        ]);
+                }
+            }
+        }
+        }
+    }
+    catch(Exception $e) {
+
+      return "";
+    }
+
+    }
+
     public function index_ar($id)
     {
+
+        $this->updateCvState();
+
        $user = User::where(
         [
             "id" => $id,

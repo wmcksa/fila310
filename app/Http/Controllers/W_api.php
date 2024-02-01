@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cv_order;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Redirect;
 class W_api extends Controller
 {
    
-    function send_w_app_msg($number,$msg) {
+    function send_w_app_msg($number,$msg,$id) {
+      // dd($id);
         
               $number=str_replace('+', '', $number);
               $number=str_replace(' ', '', $number);
@@ -17,10 +19,18 @@ class W_api extends Controller
               
               //echo $number;
               //echo $msg;
+
+              $setting = Setting::where('id',$id)->first();
+              
+
          
                 $ch = curl_init();
-                $url = "http://clp.wmc-ksa.com/w_api/index.php?to=".$number."&&body=".$msg."&&token=rzv54gobiaasgqsy&&instance=instance75972";
-             
+                if($setting->instance !=null && $setting->token !=null ){
+                  $url = "http://clp.wmc-ksa.com/w_api/index.php?to=".$number."&&body=".$msg."&&token=.$setting->token.&&instance=.$setting->instance.";
+                }
+                else{
+                  $url = "http://clp.wmc-ksa.com/w_api/index.php?to=".$number."&&body=".$msg."&&token=rzv54gobiaasgqsy&&instance=instance75972";
+                }             
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);

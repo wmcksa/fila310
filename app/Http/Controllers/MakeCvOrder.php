@@ -19,7 +19,6 @@ class MakeCvOrder extends Controller
     public function make_cv_order(Request $request)
     {
 
-        // dd($request->all());
 
         $cv = Cv::where('id',$request->cv_id)->first();
 
@@ -100,7 +99,7 @@ class MakeCvOrder extends Controller
 
                     //echo $selected_user_info->phone;
                     $ob = new W_api();
-                    $ob->send_w_app_msg($user_phone_number,"لديك عميل جديد يرجى التواصل معه ");
+                    $ob->send_w_app_msg($user_phone_number,"لديك عميل جديد يرجى التواصل معه ",$setting->id);
                     return Redirect::to('https://api.whatsapp.com/send?phone='.$user_phone_number.'&&text=%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%A7%D9%83%D8%AB%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9%20%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9%20%D8%B1%D9%82%D9%85%20'.$request->cv_id);
                 }
                 else{
@@ -112,7 +111,7 @@ class MakeCvOrder extends Controller
                         $user_name=$selected_user_info->name;
                         //echo $selected_user_info->phone;
                         $ob = new W_api();
-                        $ob->send_w_app_msg($user_phone_number,"لديك عميل جديد يرجى التواصل معه ");
+                        $ob->send_w_app_msg($user_phone_number,"لديك عميل جديد يرجى التواصل معه ",$setting->id);
                         return Redirect::to('https://api.whatsapp.com/send?phone='.$user_phone_number.'&&text=%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%A7%D9%83%D8%AB%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9%20%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9%20%D8%B1%D9%82%D9%85%20'.$request->cv_id);
                     }
 
@@ -200,7 +199,7 @@ class MakeCvOrder extends Controller
     
                         //echo $selected_user_info->phone;
                         $ob = new W_api();
-                        $ob->send_w_app_msg($user_phone_number,"لديك عميل جديد يرجى التواصل معه ");
+                        $ob->send_w_app_msg($user_phone_number,"لديك عميل جديد يرجى التواصل معه ",$setting->id);
                         return Redirect::to('https://api.whatsapp.com/send?phone='.$user_phone_number.'&&text=%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%A7%D9%83%D8%AB%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9%20%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9%20%D8%B1%D9%82%D9%85%20'.$request->cv_id);
                     }
                     else{
@@ -212,7 +211,7 @@ class MakeCvOrder extends Controller
                             $user_name=$selected_user_info->name;
                             //echo $selected_user_info->phone;
                             $ob = new W_api();
-                            $ob->send_w_app_msg($user_phone_number,"لديك عميل جديد يرجى التواصل معه ");
+                            $ob->send_w_app_msg($user_phone_number,"لديك عميل جديد يرجى التواصل معه ",$setting->id);
                             return Redirect::to('https://api.whatsapp.com/send?phone='.$user_phone_number.'&&text=%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%A7%D9%83%D8%AB%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9%20%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9%20%D8%B1%D9%82%D9%85%20'.$request->cv_id);
                         }   
 

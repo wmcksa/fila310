@@ -124,6 +124,9 @@
     <div class="mt-1 mb-1">
         @include('frontend.searchBar')
     </div>
+
+
+    <input value="{{$settings->is_otp_enable}}" id="is_otp_enable" hidden>
   
 
     <div class="mt-1 mb-1">
@@ -159,7 +162,7 @@
                                       <p class="price">رقم السيره الذاتيه :</p><span>{{$cv->id}}</span>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                    <p class="price"> الحاله :</p><span>@if($cv->final_status=="Reserved") محجوز مؤقتا @elseif($cv->final_status=="Available") متاح @elseif($cv->final_status=="Back") متاح  @else غير متاح @endif</span>
+                                    <p class="price"> الحاله :</p><span>@if($cv->final_status=="Reserved") محجوز مؤقتا @elseif($cv->final_status=="Available") متاح @elseif($cv->final_status=="Back") متاح  @elseif($cv->final_status=="") متاح  @else غير متاح @endif</span>
                                     </div>
                                 </div>
                                 
@@ -242,7 +245,7 @@
                                                             </tr>
                                                             <tr>
                                                             <th scope="col">الحاله</th>
-                                                            <td>@if($cv->final_status=="Reserved") محجوز مؤقتا @elseif($cv->final_status=="Available") متاح @elseif($cv->final_status=="Back") متاح  @else غير متاح @endif</td>
+                                                            <td>@if($cv->final_status=="Reserved") محجوز مؤقتا @elseif($cv->final_status=="Available") متاح @elseif($cv->final_status=="Back") متاح  @elseif($cv->final_status=="") متاح  @else غير متاح @endif</td>
                                                             </tr>
                                                             
                                                         </tbody>
@@ -347,7 +350,10 @@
 @endisset
 
 
-<input value="{{$settings->is_otp_enable}}" id="is_otp_enable" hidden>
+
+
+
+
 
 <!--footer-start-->
 <footer>
