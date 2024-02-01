@@ -131,9 +131,7 @@
             <div class="container-fluid">
               <a class="navbar-brand" href="   {{$settings->site_url??""}}">موقعنا الالكتروني </a>
               <a class="navbar-brand" href="https://musaned.com.sa/home">  مساند</a>
-<!--               
-              @if($settings)<a class="navbar-brand" href="https://wa.me/{{$settings->phone}}">    وتساب</a>@endif
-              @if($settings)<a class="navbar-brand" href="tel:+{{$settings->phone}}">  اتصال  </a>@endif -->
+
             </div>
           </nav>
     </div>
@@ -372,7 +370,7 @@
 @endisset
 
 
-<a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
+<a href="https://api.whatsapp.com/send?phone={{$settings->phone}}&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
 
