@@ -42,6 +42,7 @@ use Filament\Actions\CreateAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
 use Filament\Tables\Actions\ReplicateAction;
 
 class CvResource extends Resource
@@ -177,6 +178,14 @@ class CvResource extends Resource
 
 
                 TextInput::make('cv_back_time')->label("Cv Back Time")->numeric()->translateLabel(),
+
+                Toggle::make('blocked')->hidden(function () {
+                    if (auth()->user()->user_type == "admin") {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                })
               
             ]);
     }
