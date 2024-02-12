@@ -146,7 +146,7 @@
     </div>
 
 
-    <input value="{{$settings->is_otp_enable}}" id="is_otp_enable" hidden>
+    <input value="{{$settings->is_otp_enable??""}}" id="is_otp_enable" hidden>
   
 
     <div class="mt-1 mb-1">
@@ -372,7 +372,7 @@
 @endisset
 
 
-<a href="https://api.whatsapp.com/send?phone={{$settings->phone}}&text= معلومات%20اكثر%20تكرما." class="float" target="_blank">
+<a href="https://api.whatsapp.com/send?phone={{$settings->phone??""}}&text= معلومات%20اكثر%20تكرما." class="float" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
 

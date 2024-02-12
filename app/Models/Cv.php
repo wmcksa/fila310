@@ -86,12 +86,9 @@ return $this->belongsTo(Job::class);
 
 
 public function getCvFileAttribute(){
-       if($this->attributes['cv_file'] !=null){
+
         return url('storage').'/'.$this->attributes['cv_file'];
-    }else{
-
-
-            }
+    
     }
 
 
@@ -136,6 +133,45 @@ if(auth()->user()->user_type=="office"){
                 
                         });
                     }
+
+
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function($model){
+            $user=User::where('id',auth()->user()->id)->where('available',0)->first();
+            if($user){
+                    $cv_count =Cv::where('office_id',auth()->user()->id)->count();
+                    if($cv_count >= 5 ){
+                        dd("لا يمكن اضافه سير ذاتيه فعل اشتراكك الان");
+                    }
+            }
+        });
+
+        self::created(function($model){
+            // ... code here
+        });
+
+        self::updating(function($model){
+            // ... code here
+        });
+
+        self::updated(function($model){
+            // ... code here
+        });
+
+        self::deleting(function($model){
+            // ... code here
+        });
+
+        self::deleted(function($model){
+            // ... code here
+        });
+    }
+
 
                     
 

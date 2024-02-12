@@ -132,9 +132,7 @@
             <div class="container-fluid">
               <a class="navbar-brand" href="   <?php echo e($settings->site_url??""); ?>">موقعنا الالكتروني </a>
               <a class="navbar-brand" href="https://musaned.com.sa/home">  مساند</a>
-<!--               
-              <?php if($settings): ?><a class="navbar-brand" href="https://wa.me/<?php echo e($settings->phone); ?>">    وتساب</a><?php endif; ?>
-              <?php if($settings): ?><a class="navbar-brand" href="tel:+<?php echo e($settings->phone); ?>">  اتصال  </a><?php endif; ?> -->
+
             </div>
           </nav>
     </div>
@@ -149,7 +147,7 @@
     </div>
 
 
-    <input value="<?php echo e($settings->is_otp_enable); ?>" id="is_otp_enable" hidden>
+    <input value="<?php echo e($settings->is_otp_enable??""); ?>" id="is_otp_enable" hidden>
   
 
     <div class="mt-1 mb-1">
@@ -362,8 +360,10 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
-    </section>
-</div>
+      </section>
+    </div>
+
+    
 
 <?php else: ?>
 
@@ -373,7 +373,7 @@
 <?php endif; ?>
 
 
-<a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
+<a href="https://api.whatsapp.com/send?phone=<?php echo e($settings->phone??""); ?>&text= معلومات%20اكثر%20تكرما." class="float" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
 

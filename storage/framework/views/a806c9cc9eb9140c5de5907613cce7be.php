@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="<?php echo e(asset('assets/css/owl.carousel.min.css')); ?>">
 <link rel="stylesheet" href="<?php echo e(asset('assets/css/owl.theme.default.css')); ?>">
 
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
@@ -39,6 +39,27 @@
         font-size: 1.1em;
         padding: 0.5em 1em;
       }
+
+      .float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+  font-size:30px;
+	box-shadow: 2px 2px 3px #999;
+  z-index:100;
+}
+
+.my-float{
+	margin-top:16px;
+}
+
+
       @media screen and (min-width: 768px) {
         .navbar-brand img {
           width: 100px;
@@ -111,8 +132,7 @@
             <div class="container-fluid">
               <a class="navbar-brand" href="   <?php echo e($settings->site_url??""); ?>">موقعنا الالكتروني </a>
               <a class="navbar-brand" href="https://musaned.com.sa/home">  مساند</a>
-              <?php if($settings): ?><a class="navbar-brand" href="https://wa.me/<?php echo e($settings->phone); ?>">    وتساب</a><?php endif; ?>
-              <?php if($settings): ?><a class="navbar-brand" href="tel:+<?php echo e($settings->phone); ?>">  اتصال  </a><?php endif; ?>
+
             </div>
           </nav>
     </div>
@@ -125,6 +145,9 @@
     <div class="mt-1 mb-1">
         <?php echo $__env->make('frontend.searchBar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
+
+
+    <input value="<?php echo e($settings->is_otp_enable??""); ?>" id="is_otp_enable" hidden>
   
 
     <div class="mt-1 mb-1">
@@ -160,7 +183,7 @@
                                       <p class="price">رقم السيره الذاتيه :</p><span><?php echo e($cv->id); ?></span>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                    <p class="price"> الحاله :</p><span><?php if($cv->final_status=="Reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status=="Available"): ?> متاح <?php elseif($cv->final_status=="Back"): ?> متاح  <?php else: ?> غير متاح <?php endif; ?></span>
+                                    <p class="price"> الحاله :</p><span><?php if($cv->final_status=="Reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status=="Available"): ?> متاح <?php elseif($cv->final_status=="Back"): ?> متاح  <?php elseif($cv->final_status==""): ?> متاح  <?php else: ?> غير متاح <?php endif; ?></span>
                                     </div>
                                 </div>
                                 
@@ -243,7 +266,7 @@
                                                             </tr>
                                                             <tr>
                                                             <th scope="col">الحاله</th>
-                                                            <td><?php if($cv->final_status=="Reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status=="Available"): ?> متاح <?php elseif($cv->final_status=="Back"): ?> متاح  <?php else: ?> غير متاح <?php endif; ?></td>
+                                                            <td><?php if($cv->final_status=="Reserved"): ?> محجوز مؤقتا <?php elseif($cv->final_status=="Available"): ?> متاح <?php elseif($cv->final_status=="Back"): ?> متاح  <?php elseif($cv->final_status==""): ?> متاح  <?php else: ?> غير متاح <?php endif; ?></td>
                                                             </tr>
                                                             
                                                         </tbody>
@@ -283,11 +306,11 @@
                                         <input name="office_id" id="office_id" type="text" class="form-control"  dir="rtl" required>
                                     </div>
                                     
-                                    <div class="form-group" dir="rtl" style="padding: 3px;" >
+                                    <div class="form-group" dir="rtl" style="padding: 3px;">
                                     <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" الاسم" required>
                                     </div>
                                     <div class="form-group" style="padding: 3px;">
-                                        <input name="phone" id="model_phone_id" type="number" class="form-control" readonly="readonly" placeholder="رقم جوالك" dir="rtl">
+                                        <input name="phone" id="model_phone_id" type="number" class="form-control" <?php if($settings->is_otp_enable == "1"): ?> readonly="readonly" <?php endif; ?>  placeholder="رقم جوالك" dir="rtl">
                                     </div>
                                     
                                     <div class="form-group" style="padding: 3px;">
@@ -337,8 +360,10 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
-    </section>
-</div>
+      </section>
+    </div>
+
+    
 
 <?php else: ?>
 
@@ -346,6 +371,18 @@
 <p class="alert text-center <?php echo e(Session::get('alert-class', 'alert-info')); ?>"><?php echo e(Session::get('message')); ?></p>
 <?php endif; ?>
 <?php endif; ?>
+
+
+<a href="https://api.whatsapp.com/send?phone=<?php echo e($settings->phone??""); ?>&text= معلومات%20اكثر%20تكرما." class="float" target="_blank">
+<i class="fa fa-whatsapp my-float"></i>
+</a>
+
+
+
+
+
+
+
 
 <!--footer-start-->
 <footer>
@@ -412,10 +449,14 @@
      
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
     <script type="text/javascript">
+
+     var otp_status = $('#is_otp_enable').val();
     
       //  alert("wwe");
         //return true; // prevents browser error messages  
         //  localStorage.setItem("verified", "0");
+if(otp_status =="1"){
+
         $('.otp').on('show.bs.modal', function (event) {
                 if(localStorage.getItem("verified")=="1"){
                   //$('#exampleModal').modal('toggle');
@@ -447,15 +488,27 @@
                 document.getElementById('model_phone_id').setAttribute('value',localStorage.getItem("phone"));
                 // $("#model_phone_id").prop('disabled', true);
 
-
-
-
-
-                
-
-
-
         })
+      }else{
+
+        $('.otp').on('show.bs.modal', function (event) {
+
+          var button = $(event.relatedTarget) // Button that triggered the modal
+                var recipient = button.data('cv_id') // Extract info from data-* attributes
+                var office_id = button.data('office_id') // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                
+              //alert(recipient)
+                
+                var modal = $(this)
+                //modal.find('.modal-title').text('New message to ' + recipient)
+                modal.find('.modal-body #cv_id').val(recipient)
+                modal.find('.modal-body #office_id').val(office_id)
+
+        });
+
+      }
   </script>
 
 

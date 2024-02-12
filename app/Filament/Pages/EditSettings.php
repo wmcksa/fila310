@@ -88,7 +88,7 @@ class EditSettings extends Page implements HasForms
                        "0"=>"غير مفعل",
                    ]
                     
-                )->label("website login form")->translateLabel()->searchable(),
+                )->label("website login form")->translateLabel()->required()->searchable(),
 
                 Select::make('recieve_orders_by_country')
                 ->options(
@@ -97,7 +97,7 @@ class EditSettings extends Page implements HasForms
                      "0"=>"غير مفعل",
                    ]
                     
-                )->label("recieve orders by country")->translateLabel()->searchable(),
+                )->label("recieve orders by country")->translateLabel()->required()->searchable(),
 
                 Select::make('is_otp_enable')
                 ->options(
@@ -106,7 +106,7 @@ class EditSettings extends Page implements HasForms
                      "0"=>"غير مفعل",
                    ]
                     
-                )->label("Is Otp Enable")->translateLabel()->searchable(),
+                )->label("Is Otp Enable")->translateLabel()->required()->searchable(),
 
                 TextInput::make('instance'),
                 TextInput::make('token'),
