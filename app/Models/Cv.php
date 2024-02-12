@@ -142,7 +142,7 @@ if(auth()->user()->user_type=="office"){
         parent::boot();
 
         self::creating(function($model){
-            $user=User::where('id',auth()->user()->id)->where('available',0)->first();
+            $user=User::where('id',auth()->user()->id)->where('available',0)->where('user_type','admin')->first();
             if($user){
                     $cv_count =Cv::where('office_id',auth()->user()->id)->count();
                     if($cv_count >= 5 ){
