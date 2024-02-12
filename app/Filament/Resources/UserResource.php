@@ -59,7 +59,7 @@ class UserResource extends Resource
                 Hidden::make('manager_id')->default($office_id),
 
                 TextInput::make('name')->required()->translateLabel(),
-                TextInput::make('email')->email()->unique(ignoreRecord:true)->translateLabel(),
+                TextInput::make('email')->required()->email()->unique(ignoreRecord:true)->translateLabel(),
                 TextInput::make('phone')->numeric()->translateLabel(),
                
 

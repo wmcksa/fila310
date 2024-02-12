@@ -45,7 +45,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split(Filament\Livewire\DatabaseNotifications::class, ['lazy' => true]);
 
-$__html = app('livewire')->mount($__name, $__params, '0a43GN2', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'Cy1MqPU', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 
