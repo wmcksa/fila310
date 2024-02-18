@@ -165,7 +165,7 @@
     $hasTooltip = filled($tooltip);
 ?>
 
-<?php if($tag === 'button'): ?>
+<!--[if BLOCK]><![endif]--><?php if($tag === 'button'): ?>
     <button
         <?php if($keyBindings || $hasTooltip): ?>
             x-data="{}"
@@ -192,12 +192,12 @@
                 ->style([$buttonStyles])); ?>
 
     >
-        <?php if($label): ?>
+        <!--[if BLOCK]><![endif]--><?php if($label): ?>
             <span class="sr-only">
                 <?php echo e($label); ?>
 
             </span>
-        <?php endif; ?>
+        <?php endif; ?> <!--[if ENDBLOCK]><![endif]-->
 
         <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'filament::components.icon','data' => ['attributes' => 
@@ -233,7 +233,7 @@
 <?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
 <?php endif; ?>
 
-        <?php if($hasLoadingIndicator): ?>
+        <!--[if BLOCK]><![endif]--><?php if($hasLoadingIndicator): ?>
             <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'filament::components.loading-indicator','data' => ['attributes' => 
                     \Filament\Support\prepare_inherited_attributes(
@@ -263,9 +263,9 @@
 <?php $component = $__componentOriginal71c6471fa76ce19017edc287b6f4508c; ?>
 <?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
 <?php endif; ?>
-        <?php endif; ?>
+        <?php endif; ?> <!--[if ENDBLOCK]><![endif]-->
 
-        <?php if(filled($badge)): ?>
+        <!--[if BLOCK]><![endif]--><?php if(filled($badge)): ?>
             <div class="<?php echo e($badgeContainerClasses); ?>">
                 <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'filament::components.badge','data' => ['color' => $badgeColor,'size' => 'xs']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
@@ -285,7 +285,7 @@
 <?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
 <?php endif; ?>
             </div>
-        <?php endif; ?>
+        <?php endif; ?> <!--[if ENDBLOCK]><![endif]-->
     </button>
 <?php elseif($tag === 'a'): ?>
     <a
@@ -312,12 +312,12 @@
                 ->style([$buttonStyles])); ?>
 
     >
-        <?php if($label): ?>
+        <!--[if BLOCK]><![endif]--><?php if($label): ?>
             <span class="sr-only">
                 <?php echo e($label); ?>
 
             </span>
-        <?php endif; ?>
+        <?php endif; ?> <!--[if ENDBLOCK]><![endif]-->
 
         <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'filament::components.icon','data' => ['alias' => $iconAlias,'icon' => $icon,'class' => $iconClasses]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
@@ -335,7 +335,7 @@
 <?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
 <?php endif; ?>
 
-        <?php if(filled($badge)): ?>
+        <!--[if BLOCK]><![endif]--><?php if(filled($badge)): ?>
             <div class="<?php echo e($badgeContainerClasses); ?>">
                 <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'filament::components.badge','data' => ['color' => $badgeColor,'size' => 'xs']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
@@ -355,7 +355,7 @@
 <?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
 <?php endif; ?>
             </div>
-        <?php endif; ?>
+        <?php endif; ?> <!--[if ENDBLOCK]><![endif]-->
     </a>
-<?php endif; ?>
+<?php endif; ?> <!--[if ENDBLOCK]><![endif]-->
 <?php /**PATH /home/u643910891/domains/estaaqdem.com/public_html/vendor/filament/support/src/../resources/views/components/icon-button.blade.php ENDPATH**/ ?>

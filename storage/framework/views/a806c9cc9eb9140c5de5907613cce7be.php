@@ -155,6 +155,7 @@
             <div class="container">
                 <div class="row">
                     <?php $__currentLoopData = $cvs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cv): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    
                     <div class="col-md-4 col-sm-6">
                         <div class="card card-1 shadow">
                             <div class="image-cover sameHeight">
@@ -189,7 +190,9 @@
                                 
                                 <div class="text-center pt-2">
                                       <a class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?php echo e($cv->id); ?>" style="width:100%;margin-top:3px;font-weight: bold;">مزيد من المعلومات</a><br>
+                                      <?php if($cv->cv_file != null): ?>
                                       <a href="<?php echo e($cv->cv_file); ?>" class="btn btn-primary p-2" style="width:100%;margin-top:3px;font-weight: bold;" >عرض السيره الذاتيه</a><br>
+                                      <?php endif; ?>
                                       <a class="btn btn-primary p-2" href="#<?php echo e($user->id); ?>" data-bs-toggle="modal"  data-cv_id="<?php echo e($cv->id); ?>" data-office_id="<?php echo e($user->id); ?>" class="btn  p-2" style="margin:3px;width:100%;margin-top:3px;font-weight: bold;">طلب التواصل</a>
                                 </div>
                             </div>
@@ -448,6 +451,9 @@
     <script src="<?php echo e(asset('assets/js/fslightbox.js')); ?>"></script>
      
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
+   
+    
+    
     <script type="text/javascript">
 
      var otp_status = $('#is_otp_enable').val();

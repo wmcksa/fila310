@@ -201,6 +201,7 @@ class CvResource extends Resource
                 TextColumn::make('id')->searchable()->translateLabel(),
                 TextColumn::make('name')->searchable()->translateLabel(),
                 TextColumn::make('age')->searchable()->translateLabel(),
+                TextColumn::make('created_at')->searchable()->translateLabel(),
                 TextColumn::make('User.name')->searchable()->translateLabel(),
                 TextColumn::make('Country.country')->searchable()->translateLabel() ,
                 TextColumn::make('Job.name')->searchable()->translateLabel(),

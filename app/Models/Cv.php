@@ -86,8 +86,14 @@ return $this->belongsTo(Job::class);
 
 
 public function getCvFileAttribute(){
+         
+        if($this->attributes['cv_file']){
+
 
         return url('storage').'/'.$this->attributes['cv_file'];
+        }else{
+            return null;
+        }
     
     }
 

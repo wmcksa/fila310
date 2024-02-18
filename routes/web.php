@@ -64,6 +64,9 @@ Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->grou
     Route::get('/test', 'test')->name('test');
     Route::post('/store','search_ar');//حفظ سجل جديد 
     Route::post('/insert_login_user','insert_login_user');
+
+
+    Route::post('/contact','contact')->name('contact');
     
 
 

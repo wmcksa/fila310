@@ -839,6 +839,7 @@ class ComposerStaticInitc26ec8948f24899b75b7c6968e5652fe
         'App\\Filament\\Resources\\UsersReportResource\\Pages\\CreateUsersReport' => __DIR__ . '/../..' . '/app/Filament/Resources/UsersReportResource/Pages/CreateUsersReport.php',
         'App\\Filament\\Resources\\UsersReportResource\\Pages\\EditUsersReport' => __DIR__ . '/../..' . '/app/Filament/Resources/UsersReportResource/Pages/EditUsersReport.php',
         'App\\Filament\\Resources\\UsersReportResource\\Pages\\ListUsersReports' => __DIR__ . '/../..' . '/app/Filament/Resources/UsersReportResource/Pages/ListUsersReports.php',
+        'App\\Filament\\Widgets\\StatsOverview' => __DIR__ . '/../..' . '/app/Filament/Widgets/StatsOverview.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Frontend\\FrontendController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/FrontendController.php',
         'App\\Http\\Controllers\\MakeCvOrder' => __DIR__ . '/../..' . '/app/Http/Controllers/MakeCvOrder.php',

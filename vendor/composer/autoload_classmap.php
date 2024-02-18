@@ -90,6 +90,7 @@ return array(
     'App\\Filament\\Resources\\UsersReportResource\\Pages\\CreateUsersReport' => $baseDir . '/app/Filament/Resources/UsersReportResource/Pages/CreateUsersReport.php',
     'App\\Filament\\Resources\\UsersReportResource\\Pages\\EditUsersReport' => $baseDir . '/app/Filament/Resources/UsersReportResource/Pages/EditUsersReport.php',
     'App\\Filament\\Resources\\UsersReportResource\\Pages\\ListUsersReports' => $baseDir . '/app/Filament/Resources/UsersReportResource/Pages/ListUsersReports.php',
+    'App\\Filament\\Widgets\\StatsOverview' => $baseDir . '/app/Filament/Widgets/StatsOverview.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Frontend\\FrontendController' => $baseDir . '/app/Http/Controllers/Frontend/FrontendController.php',
     'App\\Http\\Controllers\\MakeCvOrder' => $baseDir . '/app/Http/Controllers/MakeCvOrder.php',

@@ -31,7 +31,7 @@ class UserResource extends Resource
   
     public static   function shouldRegisterNavigation(): bool
     {
-    return auth()->user()->user_type=="admin"?true:false;
+    return auth()->user()->user_type=="admin"&& auth()->user()->available=="1"?true:false;
     }
 
 

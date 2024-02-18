@@ -55,21 +55,7 @@ return $this->belongsTo(Country::class);
 
 
 
-    public static function boot()
-    {
-        parent::boot();
-
-        self::creating(function($model){
-            $user=User::where('id',auth()->user()->id)->where('available',0)->where('user_type','admin')->first();
-            if($user)
-            {
-                        dd("لا يمكن اضافه  مستخدمين فعل اشتراكك الان");
-
-            }
-        });
-
-        
-    }
+    
 
 
 

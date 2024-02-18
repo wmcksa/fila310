@@ -4,7 +4,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('switch-filament-language');
 
-$__html = app('livewire')->mount($__name, $__params, '38MUXYo', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'vIffuWb', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 

@@ -132,8 +132,10 @@
             <div class="container-fluid">
               <a class="navbar-brand" href="   <?php echo e($settings->site_url??""); ?>">موقعنا الالكتروني </a>
               <a class="navbar-brand" href="https://musaned.com.sa/home">  مساند</a>
+              <a type="button" class="btn btn-primary p-1" data-bs-toggle="modal" data-bs-target="#problem" >  المقترحات </a>
 
-            </div>
+
+              
           </nav>
     </div>
   </body>
@@ -155,6 +157,7 @@
             <div class="container">
                 <div class="row">
                     <?php $__currentLoopData = $cvs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cv): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    
                     <div class="col-md-4 col-sm-6">
                         <div class="card card-1 shadow">
                             <div class="image-cover sameHeight">
@@ -189,7 +192,9 @@
                                 
                                 <div class="text-center pt-2">
                                       <a class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?php echo e($cv->id); ?>" style="width:100%;margin-top:3px;font-weight: bold;">مزيد من المعلومات</a><br>
+                                      <?php if($cv->cv_file != null): ?>
                                       <a href="<?php echo e($cv->cv_file); ?>" class="btn btn-primary p-2" style="width:100%;margin-top:3px;font-weight: bold;" >عرض السيره الذاتيه</a><br>
+                                      <?php endif; ?>
                                       <a class="btn btn-primary p-2" href="#<?php echo e($user->id); ?>" data-bs-toggle="modal"  data-cv_id="<?php echo e($cv->id); ?>" data-office_id="<?php echo e($user->id); ?>" class="btn  p-2" style="margin:3px;width:100%;margin-top:3px;font-weight: bold;">طلب التواصل</a>
                                 </div>
                             </div>
@@ -373,6 +378,47 @@
 <?php endif; ?>
 
 
+
+<!-- Modal -->
+<div class="modal fade" id="problem" tabindex="-1" aria-labelledby="problemLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="problemLabel">اقترح علينا</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                            <div class="modal-body">
+                                <form dir="rtl"  method="post" action="<?php echo e(route('contact')); ?>">
+                                  <?php echo csrf_field(); ?>
+
+                                  <input hidden name="office_id" value="<?php echo e($user->id); ?>">
+                                    
+                                    <div class="form-group" dir="rtl" style="padding: 3px;">
+                                    <input type="text" name="name" class="form-control"  placeholder=" الاسم" required>
+                                    </div>
+                                    <div class="form-group" style="padding: 3px;">
+                                        <input name="phone"  type="number" class="form-control"   placeholder="رقم الهاتف" dir="rtl">
+                                    </div>
+
+                                    <div class="form-group" style="padding: 3px;">
+                                        <textarea name="description" rows="8" cols="50" class="form-control"   placeholder="الوصف" dir="rtl" style="height: 100px;"></textarea>
+                                    </div>
+                                    
+                                    
+                                <br>
+                                     <div class="text-center form-group" style="padding: 3px;">
+                                         <button type="submit" class="btn btn-primary" style="padding: 5px; width: 200px;">ارسال</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                        </div>
+
+            </div>
+
+
 <a href="https://api.whatsapp.com/send?phone=<?php echo e($settings->phone??""); ?>&text= معلومات%20اكثر%20تكرما." class="float" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
@@ -448,6 +494,9 @@
     <script src="<?php echo e(asset('assets/js/fslightbox.js')); ?>"></script>
      
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
+   
+    
+    
     <script type="text/javascript">
 
      var otp_status = $('#is_otp_enable').val();

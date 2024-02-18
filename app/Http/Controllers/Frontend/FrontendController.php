@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\Type_of_estgdam;
 use App\Http\Controllers\Controller;
 use App\Models\Status;
+use App\Models\Contact;
 
 use App\Models\Loginuser;
 use App\Models\UsersReport;
@@ -287,6 +288,15 @@ class FrontendController extends Controller
 
         return redirect()->route('index_ar');
 
+    }
+
+
+
+    public function contact(Request $request)
+    {
+        $data = $request->all();
+        Contact::create($data);
+        return redirect()->back();
     }
 
 }
